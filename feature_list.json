@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "description": "Structured feature list. One active feature at a time. Evidence required before status=done.",
+  "features": [
+    {
+      "id": "F001",
+      "title": "Land portable harness core files",
+      "status": "done",
+      "priority": 1,
+      "depends_on": [],
+      "definition_of_done": [
+        "AGENT.md, MEMORY.md, feature_list.json, progress.md, session-handoff.md, init.sh, .grok/README.md exist",
+        "PLAN.md and RAW_MATERIALS.md present in template repo"
+      ],
+      "evidence": "Committed in agent-harness main on 2026-11-03",
+      "notes": "Template content is generic; project-specific Mission and verification commands are filled after copy."
+    },
+    {
+      "id": "F002",
+      "title": "Add README explaining how to copy the harness into any repo",
+      "status": "in_progress",
+      "priority": 2,
+      "depends_on": ["F001"],
+      "definition_of_done": [
+        "README.md documents copy steps, required customizations, and startup contract",
+        "A new agent can follow README + AGENT.md without prior context"
+      ],
+      "evidence": "",
+      "notes": ""
+    },
+    {
+      "id": "F003",
+      "title": "Optional: minimal audit / self-check script",
+      "status": "todo",
+      "priority": 3,
+      "depends_on": ["F001"],
+      "definition_of_done": [
+        "Script checks presence of core files and basic JSON validity",
+        "Documented in AGENT.md or README"
+      ],
+      "evidence": "",
+      "notes": "Inspired by learn-harness-engineering tools/audit-harness.sh and validate-harness.mjs"
+    }
+  ]
+}
