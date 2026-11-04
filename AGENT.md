@@ -70,6 +70,9 @@ Before ending:
 # Primary entrypoint
 ./init.sh
 
+# Optional structural self-check (core files + JSON validity)
+./audit-harness.sh
+
 # Or, if init.sh is not yet customized, run project-specific checks here:
 # e.g. npm test / pytest / cargo test / make check
 ```
@@ -95,6 +98,7 @@ Replace the body of `init.sh` with the real commands for this project.
 | `progress.md` | Live session continuity |
 | `session-handoff.md` | Explicit handoff for next agent/dialog |
 | `init.sh` | Startup + verification |
+| `audit-harness.sh` | Minimal structural self-check |
 | `docs/` | Detailed knowledge (on-demand) |
 | `.grok/README.md` | Grok-oriented notes |
 
