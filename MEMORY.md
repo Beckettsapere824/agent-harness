@@ -8,19 +8,20 @@ Newest entries at the **top** of each section.
 
 ### Current focus
 
-- Harness v1 templates complete and copy-ready (F001 + F002 done).
+- Harness v1 complete (F001–F003).
+- Ready to be copied into target repositories.
 
 ### Done
 
 - RAW_MATERIALS.md synthesized from c-machine-learning, learn-harness-engineering, Library, DeepSeek dsh-superagent-prototype, Anthropic / OpenAI / xAI open practices.
 - PLAN.md written.
-- Core portable files: AGENT.md, MEMORY.md, feature_list.json, progress.md, session-handoff.md, init.sh, .grok/README.md.
-- README.md with copy steps, customizations, and startup contract.
+- Core portable files: AGENT.md, MEMORY.md, feature_list.json, progress.md, session-handoff.md, init.sh, .grok/README.md, README.md.
+- audit-harness.sh (minimal structural self-check).
 
 ### Next
 
-- Optional: F003 minimal audit script (init.sh already covers presence + JSON validity).
 - Customize Mission / verification commands when copying into a real project.
+- Optional later: version metadata, multi-agent notes, example migration of c-machine-learning, richer audit.
 
 ---
 
@@ -30,6 +31,7 @@ Newest entries at the **top** of each section.
 - Verification must be runnable commands, not model self-assessment.
 - One active feature at a time unless multi-agent ownership is explicit.
 - All durable continuity is file-based (GitHub connector / any agent).
+- audit-harness.sh is structural only; project-specific tests stay in init.sh.
 
 ---
 
@@ -37,8 +39,9 @@ Newest entries at the **top** of each section.
 
 ### 2026-11-04
 
-- Confirmed README.md satisfies F002 DoD; recorded evidence and marked done.
-- Updated progress.md and session-handoff.md.
+- F002 closed (README already met DoD).
+- Implemented F003: added audit-harness.sh, documented in README + AGENT.md.
+- v1 feature set complete.
 
 ### 2026-11-03
 
