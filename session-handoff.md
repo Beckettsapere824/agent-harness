@@ -11,40 +11,46 @@ A fresh agent with **only** this file + the other harness files must be able to 
 
 ## Active feature
 
-F006 — Strengthen session-handoff for long-running resume (**closing this dialog**)
+none (F001–F006 done). **Next: multi-session persistence test (B).**
+
+Suggested test feature to create when starting B:
+
+> **F007** — Add version metadata (`VERSION` or harness version field) + optional richer audit checks (e.g. session-handoff required sections present).
 
 ## Timing
 
 | Field | Value |
 |-------|-------|
-| Last run duration | ~15–20 min (this leg) |
-| Feature started | 2026-11-04 (this dialog) |
-| Elapsed wall time on feature | ~20 min |
-| Expected remaining | small (docs + state updates) |
+| Last run duration | ~20 min (F006 implementation) |
+| Feature started | n/a (idle between features) |
+| Elapsed wall time on feature | n/a |
+| Expected remaining | Start B in a **new** dialog |
 
 ## What was done
 
-- v1 core + README + audit (F001–F003).
-- `runs.md` + duration logging (F004).
-- `docs/PERSISTENCE_TEST.md` (F005).
-- **This leg:** expanded this file with Timing, Resume checklist, Known failure modes; updating AGENT.md End of Session.
+- F001–F006 complete (core, README, audit, runs.md, persistence protocol, strengthened handoff).
+- session-handoff now has Timing, Resume checklist, Known failure modes, Template fields.
+- AGENT.md End of Session documents required handoff fields.
 
-## What remains
+## What remains (B — multi-session test)
 
-1. Finish F006 evidence + mark done in feature_list.json.
-2. Update progress / MEMORY / runs for clean close.
-3. Then **B**: run multi-session persistence test (see `docs/PERSISTENCE_TEST.md`) on a new hard task — force 3+ dialog boundaries.
+1. Open a **fresh** dialog (do not paste prior chat).
+2. Add F007 (or another hard multi-step feature) to feature_list.json; set `in_progress`.
+3. Work one leg (~15–25 min or one coherent chunk); stop deliberately.
+4. Leave perfect handoff + `runs.md` entry.
+5. Repeat in new dialogs until ≥3 legs; score each leg per `docs/PERSISTENCE_TEST.md`.
 
 ## Resume checklist (next agent — do in order)
 
 - [ ] Read `AGENT.md` fully
 - [ ] Read `MEMORY.md` (Status + recent Log)
-- [ ] Read `feature_list.json` — confirm single active / next feature
+- [ ] Read `feature_list.json`
 - [ ] Read this file + latest `runs.md` entries
 - [ ] Run `./init.sh` (fix failures before new work)
 - [ ] Optionally run `./audit-harness.sh`
-- [ ] Execute **exactly one** concrete next step from “What remains”
-- [ ] Before ending: refresh this file, prepend `runs.md`, update progress + feature_list
+- [ ] Read `docs/PERSISTENCE_TEST.md` if starting the multi-session test
+- [ ] Create/activate F007 (or chosen hard feature); one feature only
+- [ ] Before ending each leg: refresh this file, prepend `runs.md`, update progress + feature_list
 
 ## Known failure modes (avoid these)
 
@@ -56,12 +62,12 @@ F006 — Strengthen session-handoff for long-running resume (**closing this dial
 | Stale handoff | progress updated but this file not | Update both together |
 | Scope creep | Multiple features touched | One feature only until evidence of done |
 | Chat dependence | Next agent asks “what were we doing?” | This file + progress must stand alone |
+| Soft test | Single long dialog, no forced boundary | Human must end dialog and start fresh |
 
 ## Risks / notes
 
+- B only counts if dialogs are **truly separate** (no prior chat in context).
 - Keep AGENT.md short when customizing for real projects.
-- Replace init.sh checks with project-real tests after copy.
-- For multi-session tests: do **not** paste prior chat into a new dialog.
 
 ---
 
