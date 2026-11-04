@@ -8,20 +8,21 @@ Newest entries at the **top** of each section.
 
 ### Current focus
 
-- Harness v1 complete (F001–F003).
-- Ready to be copied into target repositories.
+- Shift from easy structural tests to **duration measurement** and **multi-session persistence**.
+- F004 (`runs.md`) and F005 (`docs/PERSISTENCE_TEST.md`) complete.
+- Next: F006 (stronger handoff) and/or execute the multi-session test protocol.
 
 ### Done
 
-- RAW_MATERIALS.md synthesized from c-machine-learning, learn-harness-engineering, Library, DeepSeek dsh-superagent-prototype, Anthropic / OpenAI / xAI open practices.
-- PLAN.md written.
-- Core portable files: AGENT.md, MEMORY.md, feature_list.json, progress.md, session-handoff.md, init.sh, .grok/README.md, README.md.
-- audit-harness.sh (minimal structural self-check).
+- v1 core templates + README + audit-harness.sh (F001–F003).
+- Per-session duration log (`runs.md`) and mandatory logging in AGENT.md (F004).
+- Hard multi-session persistence test protocol (F005).
 
 ### Next
 
-- Customize Mission / verification commands when copying into a real project.
-- Optional later: version metadata, multi-agent notes, example migration of c-machine-learning, richer audit.
+- Strengthen session-handoff template (F006).
+- Run forced multi-dialog tests; record wall-clock duration and resume quality.
+- Optional: version metadata, multi-agent notes, example project migration.
 
 ---
 
@@ -31,6 +32,7 @@ Newest entries at the **top** of each section.
 - Verification must be runnable commands, not model self-assessment.
 - One active feature at a time unless multi-agent ownership is explicit.
 - All durable continuity is file-based (GitHub connector / any agent).
+- **Duration matters:** log approximate wall-clock per dialog in `runs.md`; easy smoke tests hide early death and bad handoffs.
 - audit-harness.sh is structural only; project-specific tests stay in init.sh.
 
 ---
@@ -39,9 +41,9 @@ Newest entries at the **top** of each section.
 
 ### 2026-11-04
 
-- F002 closed (README already met DoD).
-- Implemented F003: added audit-harness.sh, documented in README + AGENT.md.
-- v1 feature set complete.
+- User: previous tests too easy; focus on run duration and persistent operation.
+- Added F004–F006. Implemented F004 (runs.md + wiring) and F005 (PERSISTENCE_TEST.md).
+- F001–F005 now done. Ready for F006 or first forced multi-session run.
 
 ### 2026-11-03
 
