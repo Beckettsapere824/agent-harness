@@ -57,12 +57,19 @@ A feature is done only when **all** of the following are true:
 
 Before ending:
 
-1. Update `progress.md` with current state and next concrete step.
+1. Update `progress.md` with current state and **exact** next concrete step.
 2. Update `feature_list.json` status and evidence fields.
-3. If work is incomplete, write or refresh `session-handoff.md`.
-4. **Prepend a run entry to `runs.md`** (start/end approx, duration, feature, outcome, handoff quality).
+3. If work is incomplete, refresh `session-handoff.md` including **all** of:
+   - Active feature (id + title)
+   - **Timing**: last run duration, feature start, elapsed wall time, expected remaining
+   - What was done / what remains (actionable)
+   - **Resume checklist** (ordered steps for the next agent)
+   - **Known failure modes** relevant to current work
+4. **Prepend a run entry to `runs.md`** (approx duration, feature, outcome, handoff quality).
 5. Commit only when the tree is in a safe, restartable state.
 6. Prefer short, actionable notes over long narrative.
+
+A fresh agent must be able to resume from files alone. If the next agent would need to ask “what were we doing?”, the handoff is incomplete.
 
 ---
 
@@ -98,11 +105,11 @@ Replace the body of `init.sh` with the real commands for this project.
 | `MEMORY.md` | Status, pitfalls, decision log |
 | `feature_list.json` | Structured features + evidence |
 | `progress.md` | Live session continuity |
-| `session-handoff.md` | Explicit handoff for next agent/dialog |
+| `session-handoff.md` | Explicit handoff (timing + resume checklist + failure modes) |
 | `runs.md` | Per-session duration + outcome log |
 | `init.sh` | Startup + verification |
 | `audit-harness.sh` | Minimal structural self-check |
-| `docs/` | Detailed knowledge (on-demand) |
+| `docs/` | Detailed knowledge (on-demand); includes PERSISTENCE_TEST.md |
 | `.grok/README.md` | Grok-oriented notes |
 
 Keep this file short. Put project facts in `docs/` or domain files, not here.
