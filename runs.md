@@ -12,29 +12,34 @@ At end of every working session, prepend one block:
 
 ```markdown
 ### YYYY-MM-DD HH:MM (timezone) — duration ~Xm
-- **Feature:** F00X or none
+- **Feature:** F00X / MS02 / none
 - **Outcome:** completed | partial | blocked | failed
 - **What advanced:** one-line summary
 - **Handoff quality:** clean | incomplete | missing next step
-- **Notes:** (optional: context pressure, tool errors, premature-done risk)
+- **Notes:** (optional)
 ```
-
-Rough duration is fine (estimate from first tool call to last commit / handoff write). Prefer real wall-clock over token counts.
 
 ---
 
 ## Log
 
+### 2026-11-04 ~14:20 HKT — duration ~25m
+- **Feature:** F008 + MS02 (state only)
+- **Outcome:** completed (merge); MS02 still in_progress at S2 gate
+- **What advanced:** Merged agent-harness-test eval/work/scores into agent-harness; preserved F001–F006 portable core; handoff points at MS02 S2
+- **Handoff quality:** clean
+- **Notes:** Next dialog must only do S2 (done + ledger phase 2).
+
 ### 2026-11-04 ~04:10 HKT — duration ~20m
 - **Feature:** F006
 - **Outcome:** completed
-- **What advanced:** Strengthened session-handoff (Timing, Resume checklist, Known failure modes); AGENT.md End of Session documented required fields
+- **What advanced:** Strengthened session-handoff + AGENT.md End of Session
 - **Handoff quality:** clean
-- **Notes:** A done. Ready for B (multi-session test) in fresh dialogs only.
+- **Notes:** —
 
 ### 2026-11-04 ~03:32 HKT — duration ~35m
 - **Feature:** F004, F005
 - **Outcome:** completed
 - **What advanced:** runs.md + PERSISTENCE_TEST.md
 - **Handoff quality:** clean
-- **Notes:** Shifted from easy structural tests to duration + forced handoff testing.
+- **Notes:** —
