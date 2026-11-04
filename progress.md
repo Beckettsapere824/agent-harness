@@ -6,26 +6,24 @@ Update at the end of every working session/dialog. Keep entries short and action
 
 ## Current
 
-- **Active feature:** none (F004 + F005 just closed); next candidate **F006**
-- **State:** Duration logging (`runs.md`) and hard multi-session test protocol (`docs/PERSISTENCE_TEST.md`) are in place.
-- **Next step:** Either (A) implement F006 (stronger session-handoff template), or (B) run the persistence test protocol against F006 using forced dialog boundaries and record durations.
-- **Blockers:** None.
+- **Active feature:** none (F001–F006 complete)
+- **State:** Strengthened handoff is live. Ready for **B**: multi-session persistence test.
+- **Next step:** Start persistence test protocol (`docs/PERSISTENCE_TEST.md`). Introduce a new hard feature (e.g. F007 version metadata + richer audit), force 3+ dialog boundaries, record duration and resume quality in `runs.md`.
+- **Blockers:** None. Human must open **fresh dialogs** (no pasted chat) for each leg.
 
 ---
 
 ## Recent
 
-### 2026-11-04 (this dialog)
+### 2026-11-04 (this dialog, leg A)
 
-- Added F004–F006 to feature_list.
-- Implemented F004: `runs.md` + AGENT.md/README wiring for per-run duration logging.
-- Implemented F005: `docs/PERSISTENCE_TEST.md` (3+ forced legs, metrics, pass/fail).
-- Shifted focus from easy structural tests to duration + multi-session continuity.
+- Implemented F006: session-handoff Timing + Resume checklist + Known failure modes; AGENT.md End of Session updated.
+- F001–F006 all done.
 
 ### 2026-11-04 (earlier)
 
-- F002 closed; F003 (audit-harness.sh) done; v1 structural features complete.
+- F004 runs.md; F005 PERSISTENCE_TEST.md.
 
 ### 2026-11-03
 
-- Initial v1 templates landed.
+- Initial v1 templates.
