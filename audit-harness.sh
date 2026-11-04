@@ -36,8 +36,8 @@ for f in AGENT.md MEMORY.md feature_list.json progress.md init.sh; do
   fi
 done
 
-# Optional but recommended
-for f in session-handoff.md README.md .grok/README.md; do
+# Optional but recommended (persistence + discoverability)
+for f in session-handoff.md runs.md README.md .grok/README.md; do
   if [[ -f "$f" ]]; then
     check "$f present (recommended)" "pass"
   else
