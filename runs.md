@@ -25,9 +25,16 @@ Rough duration is fine (estimate from first tool call to last commit / handoff w
 
 ## Log
 
-### 2026-11-04 ~03:30 HKT — duration ~25m (this dialog)
+### 2026-11-04 ~03:32 HKT — duration ~35m
+- **Feature:** F004, F005
+- **Outcome:** completed
+- **What advanced:** Added runs.md + AGENT/README wiring; wrote docs/PERSISTENCE_TEST.md (hard 3+ leg multi-session protocol)
+- **Handoff quality:** clean
+- **Notes:** Shifted from easy structural tests to duration + forced handoff testing. Next: F006 or execute the protocol.
+
+### 2026-11-04 ~03:30 HKT — duration ~25m (partial, same dialog)
 - **Feature:** F004 (started)
 - **Outcome:** partial
-- **What advanced:** Introduced runs.md + planned F004–F006 for harder persistence testing
-- **Handoff quality:** clean (next: finish F004 wiring into AGENT.md)
-- **Notes:** Shift from easy structural tests to duration + multi-session continuity.
+- **What advanced:** Introduced runs.md + planned F004–F006
+- **Handoff quality:** clean (superseded by later entry)
+- **Notes:** Intermediate checkpoint while implementing.
