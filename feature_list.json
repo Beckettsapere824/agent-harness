@@ -79,8 +79,22 @@
         "session-handoff.md template includes: last run duration, elapsed wall time since feature start, concrete resume checklist, known failure modes",
         "Documented in AGENT.md end-of-session section"
       ],
-      "evidence": "session-handoff.md now has Timing table, Resume checklist, Known failure modes table, and Template fields section. AGENT.md End of Session lists required handoff fields and resume-without-chat rule. Committed 2026-11-04.",
-      "notes": "Aim: reduce context rot and amnesia across dialogs."
+      "evidence": "session-handoff.md has Timing, Resume checklist, Known failure modes, Template fields. AGENT.md End of Session documents required fields. Committed 2026-11-04.",
+      "notes": ""
+    },
+    {
+      "id": "F007",
+      "title": "Version metadata + richer audit (multi-session test vehicle)",
+      "status": "todo",
+      "priority": 7,
+      "depends_on": ["F006"],
+      "definition_of_done": [
+        "VERSION file or equivalent harness version field exists and is referenced from README or AGENT.md",
+        "audit-harness.sh checks for strengthened session-handoff sections (e.g. Timing or Resume checklist)",
+        "Evidence recorded; suitable as multi-leg persistence test subject"
+      ],
+      "evidence": "",
+      "notes": "Vehicle for docs/PERSISTENCE_TEST.md: implement across ≥3 forced dialog boundaries; log duration each leg."
     }
   ]
 }
