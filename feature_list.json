@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "description": "Structured feature list. One active feature at a time. Evidence required before status=done.",
+  "description": "Structured feature list. One active feature at a time. Evidence required before status=done. Portable core (F*) + in-repo eval (MS*).",
   "features": [
     {
       "id": "F001",
@@ -48,11 +48,10 @@
       "priority": 4,
       "depends_on": ["F001"],
       "definition_of_done": [
-        "runs.md (or equivalent) records each agent session: start time, end time, duration, active feature, outcome",
-        "AGENT.md / session-handoff instructs agents to append a run entry before ending",
-        "Enables measuring wall-clock duration and spotting short vs long runs"
+        "runs.md records each agent session duration and outcome",
+        "AGENT.md instructs agents to append a run entry before ending"
       ],
-      "evidence": "runs.md created; AGENT.md requires logging; README documents Duration & persistence. Committed 2026-11-04.",
+      "evidence": "runs.md + AGENT.md End of Session. Committed 2026-11-04.",
       "notes": ""
     },
     {
@@ -62,11 +61,10 @@
       "priority": 5,
       "depends_on": ["F004"],
       "definition_of_done": [
-        "docs/PERSISTENCE_TEST.md (or similar) defines a deliberately hard, multi-dialog scenario",
-        "Scenario forces at least 2–3 forced handoffs and checks whether state + next step survive",
-        "Includes success criteria and what to measure (duration per leg, resume correctness)"
+        "docs/PERSISTENCE_TEST.md defines multi-dialog scenario",
+        "Success criteria and metrics documented"
       ],
-      "evidence": "docs/PERSISTENCE_TEST.md added. Committed 2026-11-04.",
+      "evidence": "docs/PERSISTENCE_TEST.md. Committed 2026-11-04.",
       "notes": ""
     },
     {
@@ -76,25 +74,53 @@
       "priority": 6,
       "depends_on": ["F004"],
       "definition_of_done": [
-        "session-handoff.md template includes: last run duration, elapsed wall time since feature start, concrete resume checklist, known failure modes",
+        "session-handoff includes Timing, Resume checklist, Known failure modes",
         "Documented in AGENT.md end-of-session section"
       ],
-      "evidence": "session-handoff.md has Timing, Resume checklist, Known failure modes, Template fields. AGENT.md End of Session documents required fields. Committed 2026-11-04.",
+      "evidence": "session-handoff.md + AGENT.md. Committed 2026-11-04.",
       "notes": ""
     },
     {
       "id": "F007",
-      "title": "Version metadata + richer audit (multi-session test vehicle)",
+      "title": "Version metadata + richer audit",
       "status": "todo",
+      "priority": 8,
+      "depends_on": ["F006"],
+      "definition_of_done": [
+        "VERSION file or equivalent referenced from README or AGENT.md",
+        "audit-harness.sh checks strengthened session-handoff sections"
+      ],
+      "evidence": "",
+      "notes": "Optional; lower priority than finishing MS02 fair multi-dialog."
+    },
+    {
+      "id": "F008",
+      "title": "Merge agent-harness-test eval into this repo",
+      "status": "done",
       "priority": 7,
       "depends_on": ["F006"],
       "definition_of_done": [
-        "VERSION file or equivalent harness version field exists and is referenced from README or AGENT.md",
-        "audit-harness.sh checks for strengthened session-handoff sections (e.g. Timing or Resume checklist)",
-        "Evidence recorded; suitable as multi-leg persistence test subject"
+        "eval/, TASKS.md, docs/benchmarks.md, work/ (MS01+MS02 S1) present",
+        "Historical scores under eval/scores/",
+        "Portable core (runs.md, strong handoff, audit) preserved"
       ],
-      "evidence": "",
-      "notes": "Vehicle for docs/PERSISTENCE_TEST.md: implement across ≥3 forced dialog boundaries; log duration each leg."
+      "evidence": "Imported 2026-11-04 from agent-harness-test; single-repo workflow.",
+      "notes": "No separate test repo required going forward."
+    },
+    {
+      "id": "MS02",
+      "title": "MS02 todo CLI adversarial multi-session pack",
+      "status": "in_progress",
+      "priority": 4,
+      "depends_on": ["F008"],
+      "definition_of_done": [
+        "S1 add+list + ledger phase 1",
+        "S2 done command + ledger phase 2 (separate dialog)",
+        "S3 rm + ledger phase 3 + verify.sh green (separate dialog)",
+        "Score recorded with continuity honesty"
+      ],
+      "evidence": "S1 complete in work/todo.py + session_ledger phase 1 (merged from test repo).",
+      "notes": "Next: S2 only. Do not implement rm in S2."
     }
   ]
 }
