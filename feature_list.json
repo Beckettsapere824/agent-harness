@@ -72,14 +72,14 @@
     {
       "id": "F006",
       "title": "Strengthen session-handoff for long-running resume",
-      "status": "in_progress",
+      "status": "done",
       "priority": 6,
       "depends_on": ["F004"],
       "definition_of_done": [
         "session-handoff.md template includes: last run duration, elapsed wall time since feature start, concrete resume checklist, known failure modes",
         "Documented in AGENT.md end-of-session section"
       ],
-      "evidence": "",
+      "evidence": "session-handoff.md now has Timing table, Resume checklist, Known failure modes table, and Template fields section. AGENT.md End of Session lists required handoff fields and resume-without-chat rule. Committed 2026-11-04.",
       "notes": "Aim: reduce context rot and amnesia across dialogs."
     }
   ]
