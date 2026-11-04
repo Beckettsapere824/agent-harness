@@ -16,6 +16,7 @@ Inspired by OpenAI Codex (AGENTS.md as directory page), Anthropic long-running h
    - `progress.md`
    - `session-handoff.md`
    - `init.sh`
+   - `audit-harness.sh` (optional self-check)
    - `.grok/README.md` (optional but recommended for Grok)
 
 2. Edit:
@@ -25,10 +26,10 @@ Inspired by OpenAI Codex (AGENTS.md as directory page), Anthropic long-running h
    - **feature_list.json** → replace template features with your actual work items.
    - **MEMORY.md** / **progress.md** → clear template status; write current state.
 
-3. Make init executable:
+3. Make scripts executable:
 
    ```bash
-   chmod +x init.sh
+   chmod +x init.sh audit-harness.sh
    ```
 
 4. Commit. From then on, every agent (including a fresh Grok dialog with GitHub connector) should:
@@ -47,6 +48,16 @@ Inspired by OpenAI Codex (AGENTS.md as directory page), Anthropic long-running h
 | Scope | One feature at a time; definition of done requires evidence |
 | Lifecycle | Startup checklist + `session-handoff.md` |
 
+## Self-check
+
+Run a quick structural audit anytime:
+
+```bash
+./audit-harness.sh
+```
+
+It verifies presence of core files, that `init.sh` is executable, and that `feature_list.json` is valid JSON with required fields. Exit 0 means the harness skeleton is intact.
+
 ## Design notes
 
 - **Short root file.** Keep `AGENT.md` ~80–120 lines. Put architecture/product detail under `docs/` and load on demand.
@@ -61,6 +72,7 @@ Inspired by OpenAI Codex (AGENTS.md as directory page), Anthropic long-running h
 | `PLAN.md` | Design plan and success criteria |
 | `RAW_MATERIALS.md` | Synthesized sources from frontier labs and open practices |
 | Core files above | What you copy |
+| `audit-harness.sh` | Minimal self-check script |
 
 ## License
 
