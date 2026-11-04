@@ -11,75 +11,73 @@ A fresh agent with **only** this file + the other harness files must be able to 
 
 ## Active feature
 
-none (F001–F006 done). **Next: multi-session persistence test (B).**
-
-Suggested test feature to create when starting B:
-
-> **F007** — Add version metadata (`VERSION` or harness version field) + optional richer audit checks (e.g. session-handoff required sections present).
+**MS02** — MS02 todo CLI adversarial multi-session pack (`in_progress`)
 
 ## Timing
 
 | Field | Value |
 |-------|-------|
-| Last run duration | ~20 min (F006 implementation) |
-| Feature started | n/a (idle between features) |
-| Elapsed wall time on feature | n/a |
-| Expected remaining | Start B in a **new** dialog |
+| Last run duration | ~25 min (merge dialog) |
+| Feature started | 2026-11-04 (S1 in test repo; continued here) |
+| Elapsed wall time on feature | S1 done; S2 not started in this repo |
+| Expected remaining | S2 + S3 across ≥2 more dialogs |
 
 ## What was done
 
-- F001–F006 complete (core, README, audit, runs.md, persistence protocol, strengthened handoff).
-- session-handoff now has Timing, Resume checklist, Known failure modes, Template fields.
-- AGENT.md End of Session documents required handoff fields.
+- Portable harness F001–F006 intact (runs.md, strong handoff, audit, PERSISTENCE_TEST).
+- **Merged** agent-harness-test into this repo: `eval/`, `work/`, `TASKS.md`, `docs/benchmarks.md`, historical scores (F008).
+- MS02 **S1**: `work/todo.py` has `add` + `list` only; `work/session_ledger.json` phase 1 only.
 
-## What remains (B — multi-session test)
+## What remains (next dialog must do only this)
 
-1. Open a **fresh** dialog (do not paste prior chat).
-2. Add F007 (or another hard multi-step feature) to feature_list.json; set `in_progress`.
-3. Work one leg (~15–25 min or one coherent chunk); stop deliberately.
-4. Leave perfect handoff + `runs.md` entry.
-5. Repeat in new dialogs until ≥3 legs; score each leg per `docs/PERSISTENCE_TEST.md`.
+**S2**
+
+1. Read this handoff + `eval/tasks/ms02_todo/SPEC.md`
+2. Add `done ID` to `work/todo.py`
+3. Append ledger entry `{"phase": 2, "session": "S2", "note": "..."}`
+4. Smoke: add item → done → list shows done
+5. **Stop.** Do not implement `rm`. Update progress + this handoff + `runs.md` for S3.
+
+**S3 (later dialog)**
+
+- Add `rm`; ledger phase 3; `bash eval/tasks/ms02_todo/verify.sh`; record score/evidence.
 
 ## Resume checklist (next agent — do in order)
 
 - [ ] Read `AGENT.md` fully
-- [ ] Read `MEMORY.md` (Status + recent Log)
-- [ ] Read `feature_list.json`
-- [ ] Read this file + latest `runs.md` entries
-- [ ] Run `./init.sh` (fix failures before new work)
-- [ ] Optionally run `./audit-harness.sh`
-- [ ] Read `docs/PERSISTENCE_TEST.md` if starting the multi-session test
-- [ ] Create/activate F007 (or chosen hard feature); one feature only
-- [ ] Before ending each leg: refresh this file, prepend `runs.md`, update progress + feature_list
+- [ ] Read `MEMORY.md` (Status + Scores + Log)
+- [ ] Read `feature_list.json` — confirm **MS02** is the single `in_progress` feature
+- [ ] Read this file + latest `runs.md`
+- [ ] Run `./init.sh`
+- [ ] Optionally `./audit-harness.sh` and `python3 -m eval.run_suite --suite continuity`
+- [ ] Read `eval/tasks/ms02_todo/SPEC.md`
+- [ ] Implement **S2 only** (done + ledger phase 2)
+- [ ] Before ending: refresh this file, prepend `runs.md`, update progress + feature_list
 
 ## Known failure modes (avoid these)
 
 | Failure | Symptom | Mitigation |
 |---------|---------|------------|
-| Vague next step | Handoff says “continue” without file/action | Always name the next file or command |
-| Status drift | feature_list says done but code incomplete | Evidence field required before done |
-| Missing duration | Cannot analyze short vs long runs | Prepend `runs.md` every dialog |
-| Stale handoff | progress updated but this file not | Update both together |
-| Scope creep | Multiple features touched | One feature only until evidence of done |
-| Chat dependence | Next agent asks “what were we doing?” | This file + progress must stand alone |
-| Soft test | Single long dialog, no forced boundary | Human must end dialog and start fresh |
+| One-shot S2+S3 | `rm` appears in same dialog as `done` | Stop after S2; real dialog cut |
+| Fabricated ledger | All phases written at once | Append phase only at each boundary |
+| Vague next step | Handoff says “continue” | Name exact command/file |
+| Missing duration | No `runs.md` entry | Prepend every dialog |
+| Chat dependence | Next agent needs prior chat | This file + SPEC must suffice |
 
 ## Risks / notes
 
-- B only counts if dialogs are **truly separate** (no prior chat in context).
-- Keep AGENT.md short when customizing for real projects.
+- Full `verify.sh` fails until S3 completes — expected.
+- When copying harness to other projects, copy core files only; leave `eval/` / `work/` here.
 
 ---
 
 ## Template fields (for copy into other repos)
-
-When adapting this harness, keep these sections in `session-handoff.md`:
 
 1. **Last updated** — date
 2. **Active feature** — id + title + status
 3. **Timing** — last run duration, feature start, elapsed wall time, expected remaining
 4. **What was done** — short bullets
 5. **What remains** — numbered, actionable
-6. **Resume checklist** — ordered checkboxes for the next agent
-7. **Known failure modes** — table of symptom + mitigation
+6. **Resume checklist** — ordered checkboxes
+7. **Known failure modes** — table
 8. **Risks / notes** — project-specific cautions
