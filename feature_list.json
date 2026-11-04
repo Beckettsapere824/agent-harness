@@ -13,7 +13,7 @@
         "PLAN.md and RAW_MATERIALS.md present in template repo"
       ],
       "evidence": "Committed in agent-harness main on 2026-11-03",
-      "notes": "Template content is generic; project-specific Mission and verification commands are filled after copy."
+      "notes": ""
     },
     {
       "id": "F002",
@@ -25,7 +25,7 @@
         "README.md documents copy steps, required customizations, and startup contract",
         "A new agent can follow README + AGENT.md without prior context"
       ],
-      "evidence": "README.md present on main; contains Quick start copy steps, required customizations, Core contract table, Design notes. Verified 2026-11-04.",
+      "evidence": "README.md present; verified 2026-11-04.",
       "notes": ""
     },
     {
@@ -38,13 +38,13 @@
         "Script checks presence of core files and basic JSON validity",
         "Documented in AGENT.md or README"
       ],
-      "evidence": "audit-harness.sh added and documented in README + AGENT.md. Committed 2026-11-04.",
-      "notes": "Inspired by learn-harness-engineering tools/audit-harness.sh; kept minimal."
+      "evidence": "audit-harness.sh added and documented. Committed 2026-11-04.",
+      "notes": ""
     },
     {
       "id": "F004",
       "title": "Run log + duration tracking for persistence analysis",
-      "status": "in_progress",
+      "status": "done",
       "priority": 4,
       "depends_on": ["F001"],
       "definition_of_done": [
@@ -52,13 +52,13 @@
         "AGENT.md / session-handoff instructs agents to append a run entry before ending",
         "Enables measuring wall-clock duration and spotting short vs long runs"
       ],
-      "evidence": "",
+      "evidence": "runs.md created with logging template. AGENT.md End of Session + Pointers require prepend. README Duration & persistence section. audit treats runs.md as recommended. Committed 2026-11-04.",
       "notes": "Focus: previous tests too easy; need data on how long each run lasts and what breaks persistence."
     },
     {
       "id": "F005",
       "title": "Hard multi-session persistence test protocol",
-      "status": "todo",
+      "status": "in_progress",
       "priority": 5,
       "depends_on": ["F004"],
       "definition_of_done": [
