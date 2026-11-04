@@ -8,21 +8,21 @@ Newest entries at the **top** of each section.
 
 ### Current focus
 
-- Shift from easy structural tests to **duration measurement** and **multi-session persistence**.
-- F004 (`runs.md`) and F005 (`docs/PERSISTENCE_TEST.md`) complete.
-- Next: F006 (stronger handoff) and/or execute the multi-session test protocol.
+- F001–F006 complete.
+- Next: **multi-session persistence test (B)** using `docs/PERSISTENCE_TEST.md`.
+- Suggested vehicle: new F007 (version metadata + richer audit), implemented across ≥3 forced dialog boundaries.
 
 ### Done
 
-- v1 core templates + README + audit-harness.sh (F001–F003).
-- Per-session duration log (`runs.md`) and mandatory logging in AGENT.md (F004).
-- Hard multi-session persistence test protocol (F005).
+- v1 core + README + audit (F001–F003).
+- runs.md duration log (F004).
+- Hard multi-session test protocol (F005).
+- Strengthened session-handoff: Timing, Resume checklist, Known failure modes (F006).
 
 ### Next
 
-- Strengthen session-handoff template (F006).
-- Run forced multi-dialog tests; record wall-clock duration and resume quality.
-- Optional: version metadata, multi-agent notes, example project migration.
+- Run B: fresh dialogs only; record duration + handoff quality per leg.
+- Optional later: multi-agent notes, example project migration.
 
 ---
 
@@ -32,8 +32,9 @@ Newest entries at the **top** of each section.
 - Verification must be runnable commands, not model self-assessment.
 - One active feature at a time unless multi-agent ownership is explicit.
 - All durable continuity is file-based (GitHub connector / any agent).
-- **Duration matters:** log approximate wall-clock per dialog in `runs.md`; easy smoke tests hide early death and bad handoffs.
-- audit-harness.sh is structural only; project-specific tests stay in init.sh.
+- **Duration matters:** log approximate wall-clock per dialog in `runs.md`.
+- **Handoff must stand alone:** Timing + resume checklist + failure modes required when incomplete.
+- Soft tests (single dialog) do not validate persistence; force real boundaries.
 
 ---
 
@@ -41,11 +42,14 @@ Newest entries at the **top** of each section.
 
 ### 2026-11-04
 
-- User: previous tests too easy; focus on run duration and persistent operation.
-- Added F004–F006. Implemented F004 (runs.md + wiring) and F005 (PERSISTENCE_TEST.md).
-- F001–F005 now done. Ready for F006 or first forced multi-session run.
+- User: 先A后B (implement F006, then multi-session test).
+- F006 done: session-handoff + AGENT.md End of Session strengthened.
+- Prepared handoff for B; suggested F007 as test vehicle.
+
+### 2026-11-04 (earlier)
+
+- F004 runs.md; F005 PERSISTENCE_TEST.md; shift to duration + persistence focus.
 
 ### 2026-11-03
 
 - Initial v1 harness templates committed.
-- Sources: walkinglabs/learn-harness-engineering, Beckettsapere824/c-machine-learning & Library, deepseek-ai/dsh-superagent-prototype, Anthropic effective-harnesses + cwc-long-running-agents, OpenAI harness-engineering / Codex AGENTS.md, xAI grok-build.
