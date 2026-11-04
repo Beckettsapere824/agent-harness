@@ -18,14 +18,14 @@
     {
       "id": "F002",
       "title": "Add README explaining how to copy the harness into any repo",
-      "status": "in_progress",
+      "status": "done",
       "priority": 2,
       "depends_on": ["F001"],
       "definition_of_done": [
         "README.md documents copy steps, required customizations, and startup contract",
         "A new agent can follow README + AGENT.md without prior context"
       ],
-      "evidence": "",
+      "evidence": "README.md present on main (SHA 94b8459); contains Quick start copy steps, required customizations (AGENT.md Mission, init.sh, feature_list), Core contract table, Design notes. Verified by reading file contents 2026-11-04.",
       "notes": ""
     },
     {
