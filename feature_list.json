@@ -52,13 +52,13 @@
         "AGENT.md / session-handoff instructs agents to append a run entry before ending",
         "Enables measuring wall-clock duration and spotting short vs long runs"
       ],
-      "evidence": "runs.md created with logging template. AGENT.md End of Session + Pointers require prepend. README Duration & persistence section. audit treats runs.md as recommended. Committed 2026-11-04.",
-      "notes": "Focus: previous tests too easy; need data on how long each run lasts and what breaks persistence."
+      "evidence": "runs.md created; AGENT.md requires logging; README documents Duration & persistence. Committed 2026-11-04.",
+      "notes": ""
     },
     {
       "id": "F005",
       "title": "Hard multi-session persistence test protocol",
-      "status": "in_progress",
+      "status": "done",
       "priority": 5,
       "depends_on": ["F004"],
       "definition_of_done": [
@@ -66,7 +66,7 @@
         "Scenario forces at least 2–3 forced handoffs and checks whether state + next step survive",
         "Includes success criteria and what to measure (duration per leg, resume correctness)"
       ],
-      "evidence": "",
+      "evidence": "docs/PERSISTENCE_TEST.md added: forced 3+ legs, pass/fail checklist, metrics (duration, handoff quality, resume friction), known failure modes. Committed 2026-11-04.",
       "notes": "Make tests harder than previous smoke checks; target long-running continuity."
     },
     {
@@ -80,7 +80,7 @@
         "Documented in AGENT.md end-of-session section"
       ],
       "evidence": "",
-      "notes": "Aim: reduce context rot and amnesia across dialogs."
+      "notes": "Aim: reduce context rot and amnesia across dialogs. Natural candidate for the first multi-session test run."
     }
   ]
 }
