@@ -31,15 +31,15 @@
     {
       "id": "F003",
       "title": "Optional: minimal audit / self-check script",
-      "status": "todo",
+      "status": "done",
       "priority": 3,
       "depends_on": ["F001"],
       "definition_of_done": [
         "Script checks presence of core files and basic JSON validity",
         "Documented in AGENT.md or README"
       ],
-      "evidence": "",
-      "notes": "Inspired by learn-harness-engineering tools/audit-harness.sh and validate-harness.mjs"
+      "evidence": "audit-harness.sh added (checks core files, init.sh executable, feature_list.json schema). Documented in README.md (Self-check section + copy list) and AGENT.md (Verification Commands + Pointers). Committed 2026-11-04.",
+      "notes": "Inspired by learn-harness-engineering tools/audit-harness.sh; kept minimal and zero-dependency."
     }
   ]
 }
