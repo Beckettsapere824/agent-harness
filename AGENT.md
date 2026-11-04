@@ -8,9 +8,7 @@ Read order: `AGENT.md` → `MEMORY.md` → `feature_list.json` → `progress.md`
 
 ## Mission
 
-*(Replace this paragraph with the project mission. Keep it short.)*
-
-Build and maintain a reliable, repo-native agent harness that can be copied into arbitrary repositories and used across dialogs via GitHub connector, without relying on chat history. Emphasize durable state and measurable session duration so work can persist across long or interrupted runs.
+Build and maintain a reliable, repo-native agent harness that can be copied into arbitrary repositories and used across dialogs via GitHub connector, without relying on chat history. In *this* repository, also raise measurable reliability via `eval/` multi-session packs and score history.
 
 ---
 
@@ -20,11 +18,11 @@ Before writing code or claiming progress:
 
 1. Confirm working directory / repo context.
 2. Read this file completely.
-3. Read `MEMORY.md` (status, pitfalls, recent log).
+3. Read `MEMORY.md` (status, pitfalls, recent log, scores).
 4. Run `./init.sh` (or the verification commands listed at the bottom). Fix failures before new scope.
 5. Read `feature_list.json`. Select **exactly one** unfinished feature.
 6. Read `progress.md`, `session-handoff.md`, and recent entries in `runs.md` if they exist.
-7. Load additional docs under `docs/` only when needed for the chosen feature.
+7. Load `eval/`, `TASKS.md`, or `docs/` only when needed for the chosen feature.
 
 If baseline verification fails, repair that first.
 
@@ -39,6 +37,7 @@ If baseline verification fails, repair that first.
 - **Leave clean state.** The next session/dialog must be able to run `./init.sh` immediately.
 - **Honest reporting.** Mark drafts unfinished; report failures as failures; do not bypass limits to avoid asking.
 - **Log every run.** Append a duration entry to `runs.md` before ending the dialog (see End of Session).
+- **Multi-session packs.** For MS02-style packs, obey session gates in the pack SPEC (ledger phases); do not one-shot all phases.
 
 ---
 
@@ -47,7 +46,7 @@ If baseline verification fails, repair that first.
 A feature is done only when **all** of the following are true:
 
 - [ ] Target behavior is implemented
-- [ ] Required verification actually ran (tests / lint / type-check / smoke)
+- [ ] Required verification actually ran (tests / lint / type-check / smoke / pack verify)
 - [ ] Evidence recorded in `feature_list.json` or `progress.md`
 - [ ] Repository remains restartable from the standard startup path
 
@@ -79,20 +78,24 @@ A fresh agent must be able to resume from files alone. If the next agent would n
 # Primary entrypoint
 ./init.sh
 
-# Optional structural self-check (core files + JSON validity)
+# Optional structural self-check
 ./audit-harness.sh
 
-# Or, if init.sh is not yet customized, run project-specific checks here:
-# e.g. npm test / pytest / cargo test / make check
+# In-repo eval suites (this repo)
+python3 -m eval.run_suite --suite structural
+python3 -m eval.run_suite --suite continuity
+# Pack verifies (when implementing MS packs):
+# bash eval/tasks/ms01_counter/verify.sh
+# bash eval/tasks/ms02_todo/verify.sh
 ```
 
-Replace the body of `init.sh` with the real commands for this project.
+When copying the harness into another project, replace project-specific checks in `init.sh`; you need not copy `eval/` or `work/`.
 
 ---
 
 ## Escalation
 
-- Architecture or product decisions → consult `docs/` if present, otherwise ask the human.
+- Architecture or product decisions → consult `docs/` / `TASKS.md` if present, otherwise ask the human.
 - Unclear requirements → ask one concrete question; do not invent scope.
 - Repeated verification failures → update progress, leave a clear blocker note, stop.
 
@@ -102,14 +105,17 @@ Replace the body of `init.sh` with the real commands for this project.
 
 | Path | Role |
 |------|------|
-| `MEMORY.md` | Status, pitfalls, decision log |
+| `MEMORY.md` | Status, pitfalls, scores, log |
 | `feature_list.json` | Structured features + evidence |
 | `progress.md` | Live session continuity |
 | `session-handoff.md` | Explicit handoff (timing + resume checklist + failure modes) |
 | `runs.md` | Per-session duration + outcome log |
 | `init.sh` | Startup + verification |
 | `audit-harness.sh` | Minimal structural self-check |
-| `docs/` | Detailed knowledge (on-demand); includes PERSISTENCE_TEST.md |
+| `TASKS.md` | Long-running eval program |
+| `eval/` | Suites, task packs, historical scores |
+| `work/` | Pack implementation workspace |
+| `docs/` | PERSISTENCE_TEST, benchmarks, on-demand detail |
 | `.grok/README.md` | Grok-oriented notes |
 
 Keep this file short. Put project facts in `docs/` or domain files, not here.
