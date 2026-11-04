@@ -6,9 +6,9 @@ Update at the end of every working session/dialog. Keep entries short and action
 
 ## Current
 
-- **Active feature:** none (F002 complete)
-- **State:** F001 and F002 done. Template is copy-ready.
-- **Next step:** Optionally implement F003 (minimal audit/self-check script), or leave as-is for now.
+- **Active feature:** none (all v1 features done)
+- **State:** F001–F003 complete. Template is copy-ready.
+- **Next step:** Use the harness in a real project, or add further optional improvements (version metadata, multi-agent notes, example migration).
 - **Blockers:** None.
 
 ---
@@ -17,8 +17,9 @@ Update at the end of every working session/dialog. Keep entries short and action
 
 ### 2026-11-04
 
-- Verified README.md already documents copy steps, customizations, and startup contract.
-- Recorded evidence for F002 and marked done.
+- F002 marked done (README already satisfied DoD).
+- Implemented F003: added `audit-harness.sh`, documented in README + AGENT.md.
+- All planned v1 features complete.
 
 ### 2026-11-03
 
