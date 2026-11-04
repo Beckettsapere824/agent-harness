@@ -10,26 +10,27 @@ Use this when work is incomplete and another agent or a new dialog must continue
 
 ## Active feature
 
-none (F002 complete)
+none (v1 features F001–F003 complete)
 
 ## What was done
 
 - Core v1 files committed (F001).
-- README.md documents copy steps, required customizations, and startup contract (F002).
-- Evidence recorded; feature_list.json updated.
+- README documents copy steps and startup contract (F002).
+- Minimal `audit-harness.sh` added and documented (F003).
 
 ## What remains
 
-- Optional: F003 — minimal audit / self-check script (presence + JSON validity; already partially covered by init.sh).
-- When copying into a real project: customize Mission, init.sh verification, feature_list.json items.
+- Optional future work: version metadata, multi-agent notes, example migration of an existing project, richer audit checks.
+- When copying into a real project: customize Mission, init.sh verification commands, and feature_list.json.
 
 ## How to resume
 
 1. Read AGENT.md → MEMORY.md → feature_list.json → this file.
-2. Run `./init.sh`.
-3. If continuing: pick F003 or leave template as-is. Do not invent new scope without human direction.
+2. Run `./init.sh` (and optionally `./audit-harness.sh`).
+3. Pick a new feature or start a real project adaptation; do not invent scope without human direction.
 
 ## Risks / notes
 
 - Keep AGENT.md short when customizing for a real project.
 - Replace verification commands in init.sh with project-real checks.
+- `audit-harness.sh` is structural only; project tests still belong in init.sh.
