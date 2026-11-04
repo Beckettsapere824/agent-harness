@@ -2,7 +2,7 @@
 
 This file is the **entry point**. Any coding agent (Grok, Claude, Codex, etc.) working in this repository must read it first.
 
-Read order: `AGENT.md` → `MEMORY.md` → `feature_list.json` → `progress.md` (and `session-handoff.md` if present) → run `./init.sh`.
+Read order: `AGENT.md` → `MEMORY.md` → `feature_list.json` → `progress.md` (and `session-handoff.md` / `runs.md` if present) → run `./init.sh`.
 
 ---
 
@@ -10,7 +10,7 @@ Read order: `AGENT.md` → `MEMORY.md` → `feature_list.json` → `progress.md`
 
 *(Replace this paragraph with the project mission. Keep it short.)*
 
-Build and maintain a reliable, repo-native agent harness that can be copied into arbitrary repositories and used across dialogs via GitHub connector, without relying on chat history.
+Build and maintain a reliable, repo-native agent harness that can be copied into arbitrary repositories and used across dialogs via GitHub connector, without relying on chat history. Emphasize durable state and measurable session duration so work can persist across long or interrupted runs.
 
 ---
 
@@ -23,7 +23,7 @@ Before writing code or claiming progress:
 3. Read `MEMORY.md` (status, pitfalls, recent log).
 4. Run `./init.sh` (or the verification commands listed at the bottom). Fix failures before new scope.
 5. Read `feature_list.json`. Select **exactly one** unfinished feature.
-6. Read `progress.md` and `session-handoff.md` if they exist.
+6. Read `progress.md`, `session-handoff.md`, and recent entries in `runs.md` if they exist.
 7. Load additional docs under `docs/` only when needed for the chosen feature.
 
 If baseline verification fails, repair that first.
@@ -38,6 +38,7 @@ If baseline verification fails, repair that first.
 - **Stay in scope.** Do not modify unrelated files or rewrite the feature list to hide unfinished work.
 - **Leave clean state.** The next session/dialog must be able to run `./init.sh` immediately.
 - **Honest reporting.** Mark drafts unfinished; report failures as failures; do not bypass limits to avoid asking.
+- **Log every run.** Append a duration entry to `runs.md` before ending the dialog (see End of Session).
 
 ---
 
@@ -59,8 +60,9 @@ Before ending:
 1. Update `progress.md` with current state and next concrete step.
 2. Update `feature_list.json` status and evidence fields.
 3. If work is incomplete, write or refresh `session-handoff.md`.
-4. Commit only when the tree is in a safe, restartable state.
-5. Prefer short, actionable notes over long narrative.
+4. **Prepend a run entry to `runs.md`** (start/end approx, duration, feature, outcome, handoff quality).
+5. Commit only when the tree is in a safe, restartable state.
+6. Prefer short, actionable notes over long narrative.
 
 ---
 
@@ -97,6 +99,7 @@ Replace the body of `init.sh` with the real commands for this project.
 | `feature_list.json` | Structured features + evidence |
 | `progress.md` | Live session continuity |
 | `session-handoff.md` | Explicit handoff for next agent/dialog |
+| `runs.md` | Per-session duration + outcome log |
 | `init.sh` | Startup + verification |
 | `audit-harness.sh` | Minimal structural self-check |
 | `docs/` | Detailed knowledge (on-demand) |
