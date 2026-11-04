@@ -15,6 +15,7 @@ Inspired by OpenAI Codex (AGENTS.md as directory page), Anthropic long-running h
    - `feature_list.json`
    - `progress.md`
    - `session-handoff.md`
+   - `runs.md` (session duration log)
    - `init.sh`
    - `audit-harness.sh` (optional self-check)
    - `.grok/README.md` (optional but recommended for Grok)
@@ -24,7 +25,7 @@ Inspired by OpenAI Codex (AGENTS.md as directory page), Anthropic long-running h
    - **AGENT.md** → Mission paragraph; verification commands section.
    - **init.sh** → real project checks (`npm test`, `pytest`, `cargo test`, …).
    - **feature_list.json** → replace template features with your actual work items.
-   - **MEMORY.md** / **progress.md** → clear template status; write current state.
+   - **MEMORY.md** / **progress.md** / **runs.md** → clear template status; write current state.
 
 3. Make scripts executable:
 
@@ -36,17 +37,17 @@ Inspired by OpenAI Codex (AGENTS.md as directory page), Anthropic long-running h
 
    - Read `AGENT.md` first
    - Follow the startup workflow
-   - Update state files before ending the session
+   - Update state files and append a `runs.md` entry before ending the session
 
 ## Core contract (summary)
 
 | Subsystem | Artifact |
 |-----------|----------|
 | Instructions | `AGENT.md` (short directory page + invariants) |
-| State | `MEMORY.md`, `feature_list.json`, `progress.md` |
+| State | `MEMORY.md`, `feature_list.json`, `progress.md`, `runs.md` |
 | Verification | `init.sh` + commands listed in AGENT.md |
 | Scope | One feature at a time; definition of done requires evidence |
-| Lifecycle | Startup checklist + `session-handoff.md` |
+| Lifecycle | Startup checklist + `session-handoff.md` + duration log |
 
 ## Self-check
 
@@ -57,6 +58,10 @@ Run a quick structural audit anytime:
 ```
 
 It verifies presence of core files, that `init.sh` is executable, and that `feature_list.json` is valid JSON with required fields. Exit 0 means the harness skeleton is intact.
+
+## Duration & persistence
+
+Every dialog should prepend an entry to `runs.md` (approx start, duration, feature, outcome, handoff quality). This is the primary data for answering: how long does a run last, and does state survive the next handoff?
 
 ## Design notes
 
@@ -73,6 +78,7 @@ It verifies presence of core files, that `init.sh` is executable, and that `feat
 | `RAW_MATERIALS.md` | Synthesized sources from frontier labs and open practices |
 | Core files above | What you copy |
 | `audit-harness.sh` | Minimal self-check script |
+| `runs.md` | Per-session duration + outcome log |
 
 ## License
 
