@@ -23,6 +23,13 @@ At end of every working session, prepend one block:
 
 ## Log
 
+### 2026-11-17 ~16:00 HKT — duration ~single dialog
+- **Feature:** F009 + F010 (Phase 1+2)
+- **Outcome:** completed
+- **What advanced:** Binding HARNESS_LESSONS, PUSH_GATE + assert_no_stub, EXIT_CRITERIA, RETRO_ROUND; AGENT.md read-order/inject/push/retro rules; audit strengthened; soft-exit E1/E2/E4–E7
+- **Handoff quality:** clean
+- **Notes:** Next dialog = MS02 S2 only.
+
 ### 2026-11-04 ~14:20 HKT — duration ~25m
 - **Feature:** F008 + MS02 (state only)
 - **Outcome:** completed (merge); MS02 still in_progress at S2 gate

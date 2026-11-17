@@ -7,7 +7,7 @@ A fresh agent with **only** this file + the other harness files must be able to 
 
 ## Last updated
 
-2026-11-04
+2026-11-17
 
 ## Active feature
 
@@ -17,15 +17,16 @@ A fresh agent with **only** this file + the other harness files must be able to 
 
 | Field | Value |
 |-------|-------|
-| Last run duration | ~25 min (merge dialog) |
+| Last run duration | ~Phase 1+2 dialog (hardening) |
 | Feature started | 2026-11-04 (S1 in test repo; continued here) |
-| Elapsed wall time on feature | S1 done; S2 not started in this repo |
+| Elapsed wall time on feature | S1 done; S2 not started |
 | Expected remaining | S2 + S3 across ≥2 more dialogs |
 
 ## What was done
 
-- Portable harness F001–F006 intact (runs.md, strong handoff, audit, PERSISTENCE_TEST).
-- **Merged** agent-harness-test into this repo: `eval/`, `work/`, `TASKS.md`, `docs/benchmarks.md`, historical scores (F008).
+- Portable harness F001–F006 intact.
+- F008 merge of eval/work/TASKS/scores.
+- **Phase 1+2 (2026-11-17):** `docs/HARNESS_LESSONS.md`, `docs/HARNESS_PUSH_GATE.md`, `tools/assert_no_stub.sh`, `docs/EXIT_CRITERIA.md`, `docs/RETRO_ROUND.md`; AGENT.md read-order/inject-budget/push/retro rules; audit-harness.sh strengthened; feature_list F009/F010 marked done.
 - MS02 **S1**: `work/todo.py` has `add` + `list` only; `work/session_ledger.json` phase 1 only.
 
 ## What remains (next dialog must do only this)
@@ -44,15 +45,15 @@ A fresh agent with **only** this file + the other harness files must be able to 
 
 ## Resume checklist (next agent — do in order)
 
-- [ ] Read `AGENT.md` fully
+- [ ] Read `AGENT.md` fully (new read order includes HARNESS_LESSONS + EXIT_CRITERIA)
 - [ ] Read `MEMORY.md` (Status + Scores + Log)
+- [ ] Read `docs/HARNESS_LESSONS.md`
 - [ ] Read `feature_list.json` — confirm **MS02** is the single `in_progress` feature
 - [ ] Read this file + latest `runs.md`
-- [ ] Run `./init.sh`
-- [ ] Optionally `./audit-harness.sh` and `python3 -m eval.run_suite --suite continuity`
+- [ ] Run `./init.sh` and optionally `./audit-harness.sh` + `./tools/assert_no_stub.sh`
 - [ ] Read `eval/tasks/ms02_todo/SPEC.md`
 - [ ] Implement **S2 only** (done + ledger phase 2)
-- [ ] Before ending: refresh this file, prepend `runs.md`, update progress + feature_list
+- [ ] Before ending: refresh this file, prepend `runs.md`, update progress + feature_list; consider RETRO_ROUND entry
 
 ## Known failure modes (avoid these)
 
@@ -63,11 +64,13 @@ A fresh agent with **only** this file + the other harness files must be able to 
 | Vague next step | Handoff says “continue” | Name exact command/file |
 | Missing duration | No `runs.md` entry | Prepend every dialog |
 | Chat dependence | Next agent needs prior chat | This file + SPEC must suffice |
+| Placeholder push | Stub content committed | HARNESS_PUSH_GATE + assert_no_stub |
 
 ## Risks / notes
 
 - Full `verify.sh` fails until S3 completes — expected.
 - When copying harness to other projects, copy core files only; leave `eval/` / `work/` here.
+- Soft-exit (E1/E2/E4–E7) is met; E3 (MS02 fair multi-dialog) remains open.
 
 ---
 

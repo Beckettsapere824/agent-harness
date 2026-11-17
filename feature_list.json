@@ -38,7 +38,7 @@
         "Script checks presence of core files and basic JSON validity",
         "Documented in AGENT.md or README"
       ],
-      "evidence": "audit-harness.sh added and documented. Committed 2026-11-04.",
+      "evidence": "audit-harness.sh added and documented. Committed 2026-11-04. Strengthened 2026-11-17.",
       "notes": ""
     },
     {
@@ -91,7 +91,7 @@
         "audit-harness.sh checks strengthened session-handoff sections"
       ],
       "evidence": "",
-      "notes": "Optional; lower priority than finishing MS02 fair multi-dialog."
+      "notes": "Optional; lower priority than finishing MS02 fair multi-dialog. Partial progress via Phase 1/2 audit strengthen."
     },
     {
       "id": "F008",
@@ -106,6 +106,36 @@
       ],
       "evidence": "Imported 2026-11-04 from agent-harness-test; single-repo workflow.",
       "notes": "No separate test repo required going forward."
+    },
+    {
+      "id": "F009",
+      "title": "Phase 1: binding lessons + push gate + inject budget",
+      "status": "done",
+      "priority": 3,
+      "depends_on": ["F006"],
+      "definition_of_done": [
+        "docs/HARNESS_LESSONS.md exists and is referenced from AGENT.md",
+        "docs/HARNESS_PUSH_GATE.md + tools/assert_no_stub.sh exist",
+        "AGENT.md enforces read-order, inject budget, push integrity, failure ledger",
+        "audit-harness.sh checks new files and progress/handoff fields"
+      ],
+      "evidence": "Committed 2026-11-17 Phase 1+2.",
+      "notes": ""
+    },
+    {
+      "id": "F010",
+      "title": "Phase 2: EXIT_CRITERIA + RETRO_ROUND + measurement tightening",
+      "status": "done",
+      "priority": 3,
+      "depends_on": ["F009"],
+      "definition_of_done": [
+        "docs/EXIT_CRITERIA.md with measurable bars",
+        "docs/RETRO_ROUND.md template + first entry",
+        "AGENT.md requires retro write-back for substantive rounds",
+        "Soft-exit bars E1/E2/E4–E7 documentable"
+      ],
+      "evidence": "Committed 2026-11-17 Phase 1+2.",
+      "notes": ""
     },
     {
       "id": "MS02",

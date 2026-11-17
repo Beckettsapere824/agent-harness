@@ -36,8 +36,8 @@ for f in AGENT.md MEMORY.md feature_list.json progress.md init.sh; do
   fi
 done
 
-# Optional but recommended (persistence + discoverability)
-for f in session-handoff.md runs.md README.md .grok/README.md; do
+# Recommended / Phase 1+2
+for f in session-handoff.md runs.md README.md .grok/README.md docs/HARNESS_LESSONS.md docs/HARNESS_PUSH_GATE.md docs/EXIT_CRITERIA.md docs/RETRO_ROUND.md tools/assert_no_stub.sh; do
   if [[ -f "$f" ]]; then
     check "$f present (recommended)" "pass"
   else
@@ -47,12 +47,19 @@ done
 
 echo
 
-# --- init.sh executable ---
+# --- init.sh / assert executable ---
 echo "Permissions"
 if [[ -x init.sh ]]; then
   check "init.sh is executable" "pass"
 else
   check "init.sh is executable" "fail"
+fi
+if [[ -f tools/assert_no_stub.sh ]]; then
+  if [[ -x tools/assert_no_stub.sh ]]; then
+    check "tools/assert_no_stub.sh is executable" "pass"
+  else
+    check "tools/assert_no_stub.sh is executable" "fail"
+  fi
 fi
 
 echo
@@ -84,12 +91,39 @@ for i, f in enumerate(data['features']):
     check "valid JSON + required fields (id/title/status/definition_of_done)" "fail"
   fi
 else
-  # Fallback: basic syntax only if python3 unavailable
   if [[ -s feature_list.json ]]; then
     check "feature_list.json non-empty (python3 not available for deeper check)" "pass"
   else
     check "feature_list.json non-empty" "fail"
   fi
+fi
+
+echo
+
+# --- progress.md Next exact ---
+echo "progress.md"
+if [[ -f progress.md ]]; then
+  if grep -qiE 'next exact|\*\*Next exact\*\*|Next step' progress.md; then
+    check "progress.md mentions Next exact / next step" "pass"
+  else
+    check "progress.md mentions Next exact / next step" "fail"
+  fi
+else
+  check "progress.md mentions Next exact / next step" "fail"
+fi
+
+echo
+
+# --- session-handoff strength (when present) ---
+echo "session-handoff.md"
+if [[ -f session-handoff.md ]]; then
+  if grep -qiE 'Timing|Resume checklist|Known failure' session-handoff.md; then
+    check "session-handoff has Timing / Resume / failure modes" "pass"
+  else
+    check "session-handoff has Timing / Resume / failure modes" "fail"
+  fi
+else
+  check "session-handoff has Timing / Resume / failure modes" "fail"
 fi
 
 echo
