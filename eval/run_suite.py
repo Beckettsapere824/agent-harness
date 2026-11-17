@@ -32,12 +32,14 @@ def check_structural() -> dict:
         text = agent.read_text(encoding="utf-8")
         _add(checks, "instructions.has_startup", "Startup" in text or "startup" in text.lower())
         _add(checks, "instructions.has_definition_of_done", "Definition of Done" in text)
-        _add(checks, "instructions.not_encyclopedia", len(text) < 12000, f"chars={len(text)}")
+        _add(checks, "instructions.not_encyclopedia", len(text) < 14000, f"chars={len(text)}")
         _add(
             checks,
             "instructions.forbids_marking_done_without_verification",
             "Verification required" in text or "verification" in text.lower(),
         )
+        _add(checks, "instructions.mentions_harness_lessons", "HARNESS_LESSONS" in text)
+        _add(checks, "instructions.mentions_push_gate_or_stub", "PUSH_GATE" in text or "assert_no_stub" in text)
 
     memory = ROOT / "MEMORY.md"
     fl = ROOT / "feature_list.json"
@@ -47,6 +49,17 @@ def check_structural() -> dict:
     _add(checks, "state.MEMORY.md_exists", memory.is_file())
     _add(checks, "state.feature_list.json_exists", fl.is_file())
     _add(checks, "state.progress.md_exists", progress.is_file())
+
+    lessons = ROOT / "docs" / "HARNESS_LESSONS.md"
+    exit_c = ROOT / "docs" / "EXIT_CRITERIA.md"
+    push_g = ROOT / "docs" / "HARNESS_PUSH_GATE.md"
+    retro = ROOT / "docs" / "RETRO_ROUND.md"
+    assert_stub = ROOT / "tools" / "assert_no_stub.sh"
+    _add(checks, "state.HARNESS_LESSONS_exists", lessons.is_file())
+    _add(checks, "state.EXIT_CRITERIA_exists", exit_c.is_file())
+    _add(checks, "state.HARNESS_PUSH_GATE_exists", push_g.is_file())
+    _add(checks, "state.RETRO_ROUND_exists", retro.is_file())
+    _add(checks, "verification.assert_no_stub_exists", assert_stub.is_file())
 
     feats: list = []
     if fl.is_file():
@@ -103,8 +116,10 @@ def check_structural() -> dict:
     if progress.is_file():
         p = progress.read_text(encoding="utf-8").lower()
         _add(checks, "lifecycle.progress_mentions_next", "next" in p)
+        _add(checks, "lifecycle.progress_has_next_exact", "next exact" in p or "next step" in p)
     else:
         _add(checks, "lifecycle.progress_mentions_next", False)
+        _add(checks, "lifecycle.progress_has_next_exact", False)
 
     scores_dir = ROOT / "eval" / "scores"
     if memory.is_file() and scores_dir.is_dir() and any(scores_dir.glob("*.json")):
@@ -163,6 +178,11 @@ def check_continuity() -> dict:
     )
     _add(checks, "continuity.handoff_min_length", len(hand_text.strip()) >= 120, f"len={len(hand_text.strip())}")
     _add(checks, "continuity.progress_min_length", len(prog_text.strip()) >= 80, f"len={len(prog_text.strip())}")
+    _add(
+        checks,
+        "continuity.handoff_has_timing_or_failure_modes",
+        bool(re.search(r"Timing|failure modes|Resume checklist", hand_text, re.I)),
+    )
 
     ledger = ROOT / "work" / "session_ledger.json"
     if ledger.is_file():

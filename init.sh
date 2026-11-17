@@ -28,6 +28,15 @@ if [[ $missing -ne 0 ]]; then
   exit 1
 fi
 
+# Optional recommended Phase 1+2 files (warn only)
+for f in docs/HARNESS_LESSONS.md docs/EXIT_CRITERIA.md tools/assert_no_stub.sh; do
+  if [[ -f "$f" ]]; then
+    echo "OK: $f"
+  else
+    echo "NOTE: $f not present (recommended for hardened harness)"
+  fi
+done
+
 # Optional JSON sanity (python is widely available; skip if absent)
 if command -v python3 >/dev/null 2>&1; then
   python3 -c "import json; json.load(open('feature_list.json'))" \
@@ -44,4 +53,5 @@ fi
 #
 # For this template repo there is no application test suite yet.
 echo "OK: template checks passed (add project tests here)"
+echo "Hint: ./audit-harness.sh && ./tools/assert_no_stub.sh"
 echo "== init complete =="
