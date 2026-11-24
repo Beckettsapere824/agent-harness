@@ -7,6 +7,8 @@ This file is the **entry point**. Any coding agent (Grok, Claude, Codex, etc.) w
 
 Load full skill bodies, `docs/`, `eval/`, or other files **only on demand** for the single chosen feature or selected skill. Default inject budget: the files above plus at most a few task-specific files. Do not load the entire tree into context.
 
+**Compliance review:** When the human asks to audit this session, use `docs/COMPLIANCE_REVIEW.md`. Findings mean the *dialog* missed a step — do **not** change the harness solely because of review misses.
+
 ---
 
 ## Mission
@@ -74,6 +76,7 @@ See `skills/README.md` for the discovery contract. Prefer invoking a named skill
 - **Failure ledger.** New failure classes must be appended to `docs/HARNESS_LESSONS.md`.
 - **Retro write-back.** Substantive rounds require an entry in `docs/RETRO_ROUND.md` (or equivalent dated note) in addition to state files.
 - **Anti-drift.** Perform the startup assertion every dialog. See `skills/anti-drift`.
+- **Compliance review.** Use `docs/COMPLIANCE_REVIEW.md` when asked to audit the session; attribute misses to the dialog, not the harness.
 
 ---
 
@@ -150,6 +153,7 @@ When copying the harness into another project, replace project-specific checks i
 |------|------|
 | `MEMORY.md` | Status, pitfalls, scores, log |
 | `docs/HARNESS_LESSONS.md` | Binding failure ledger |
+| `docs/COMPLIANCE_REVIEW.md` | Dialog self-audit (misses = dialog, not harness) |
 | `docs/HARNESS_PUSH_GATE.md` | Anti-placeholder procedure |
 | `docs/EXIT_CRITERIA.md` | Measurable harness bars |
 | `docs/RETRO_ROUND.md` | Round retro template + history |
