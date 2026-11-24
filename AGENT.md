@@ -3,9 +3,9 @@
 This file is the **entry point**. Any coding agent (Grok, Claude, Codex, etc.) working in this repository must read it first.
 
 **Read order (mandatory):**  
-`AGENT.md` → `MEMORY.md` → `docs/HARNESS_LESSONS.md` → `docs/EXIT_CRITERIA.md` (skim) → `feature_list.json` → `progress.md` → `session-handoff.md` / `runs.md` (if present) → run `./init.sh`.
+`AGENT.md` → `MEMORY.md` → `docs/HARNESS_LESSONS.md` → `docs/EXIT_CRITERIA.md` (skim) → `feature_list.json` → `progress.md` → `session-handoff.md` / `runs.md` (if present) → run `./init.sh` → skim `skills/README.md` (descriptions only).
 
-Load `docs/`, `eval/`, or other files **only on demand** for the single chosen feature. Default inject budget: the files above plus at most a few task-specific files. Do not load the entire tree into context.
+Load full skill bodies, `docs/`, `eval/`, or other files **only on demand** for the single chosen feature or selected skill. Default inject budget: the files above plus at most a few task-specific files. Do not load the entire tree into context.
 
 ---
 
@@ -28,9 +28,20 @@ Before writing code or claiming progress:
 7. Optionally run `./audit-harness.sh` and `./tools/assert_no_stub.sh`.
 8. Read `feature_list.json`. Select **exactly one** unfinished feature.
 9. Read `progress.md` (must contain **Next exact**), `session-handoff.md`, and recent `runs.md`.
-10. Load further docs or eval only when needed for the chosen feature.
+10. Skim `skills/README.md` (descriptions only). Load a full skill body only when that skill is selected.
+11. Load further docs or eval only when needed for the chosen feature.
+
+**Anti-drift assertion (required):** Before any other work the agent must be able to state from files alone: (a) which identity or repo harness it is under, (b) that the mandatory read order is complete, (c) the single active feature id, (d) the exact next step. If any item cannot be answered, stop and repair handoff/identity first. See `skills/anti-drift/SKILL.md`.
 
 If baseline verification fails, repair that first.
+
+---
+
+## Skills layer
+
+Skills live under `skills/`. Each skill is a folder with a `SKILL.md` (name + description in front-matter; body loaded on demand).  
+Current pack (15): brainstorm, plan, implement, test-tdd, debug, code-review, verify, handoff, yagni, security-basics, anti-drift, ledger, push-gate, propose-improvement, status-report.  
+See `skills/README.md` for the discovery contract. Prefer invoking a named skill over improvising process.
 
 ---
 
@@ -43,10 +54,11 @@ If baseline verification fails, repair that first.
 - **Leave clean state.** The next session/dialog must be able to run `./init.sh` immediately.
 - **Honest reporting.** Mark drafts unfinished; report failures as failures; do not bypass limits to avoid asking.
 - **Log every run.** Prepend a duration entry to `runs.md` before ending the dialog.
-- **Multi-session packs.** For MS02-style packs, obey session gates in the pack SPEC (ledger phases); do not one-shot all phases.
-- **Push integrity.** Follow `docs/HARNESS_PUSH_GATE.md`. Never push PLACEHOLDER/stub content. Run `./tools/assert_no_stub.sh` when available.
+- **Multi-session packs.** For MS02-style packs, obey session gates in the pack SPEC (ledger phases); do not one-shot all phases. Use `skills/ledger`.
+- **Push integrity.** Follow `docs/HARNESS_PUSH_GATE.md` and `skills/push-gate`. Never push PLACEHOLDER/stub content. Run `./tools/assert_no_stub.sh` when available.
 - **Failure ledger.** New failure classes must be appended to `docs/HARNESS_LESSONS.md`.
 - **Retro write-back.** Substantive rounds require an entry in `docs/RETRO_ROUND.md` (or equivalent dated note) in addition to state files.
+- **Anti-drift.** Perform the startup assertion every dialog. See `skills/anti-drift`.
 
 ---
 
@@ -79,7 +91,7 @@ Before ending:
 7. Commit only when the tree is in a safe, restartable state.
 8. Prefer short, actionable notes over long narrative.
 
-A fresh agent must be able to resume from files alone. If the next agent would need to ask “what were we doing?”, the handoff is incomplete.
+A fresh agent must be able to resume from files alone. If the next agent would need to ask “what were we doing?”, the handoff is incomplete. Use `skills/handoff`.
 
 ---
 
@@ -103,7 +115,7 @@ python3 -m eval.run_suite --suite continuity
 # bash eval/tasks/ms02_todo/verify.sh
 ```
 
-When copying the harness into another project, replace project-specific checks in `init.sh`; you need not copy `eval/` or `work/`.
+When copying the harness into another project, replace project-specific checks in `init.sh`; you need not copy `eval/` or `work/`. Copy `skills/` when you want the process pack.
 
 ---
 
@@ -131,6 +143,7 @@ When copying the harness into another project, replace project-specific checks i
 | `init.sh` | Startup + verification |
 | `audit-harness.sh` | Structural self-check |
 | `tools/assert_no_stub.sh` | Content integrity gate |
+| `skills/` | Progressive-disclosure skill pack (15) |
 | `TASKS.md` | Long-running eval program |
 | `eval/` | Suites, task packs, historical scores |
 | `work/` | Pack implementation workspace |

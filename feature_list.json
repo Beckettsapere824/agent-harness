@@ -138,6 +138,20 @@
       "notes": ""
     },
     {
+      "id": "F011",
+      "title": "Skills layer (15 high-quality SKILL.md) + anti-drift assertion",
+      "status": "done",
+      "priority": 2,
+      "depends_on": ["F010"],
+      "definition_of_done": [
+        "skills/ directory with README + 15 SKILL.md (brainstorm, plan, implement, test-tdd, debug, code-review, verify, handoff, yagni, security-basics, anti-drift, ledger, push-gate, propose-improvement, status-report)",
+        "AGENT.md documents progressive disclosure and requires anti-drift startup assertion",
+        "Copy guidance updated so specialized repos can include skills/"
+      ],
+      "evidence": "Committed 2026-11-24. skills/ present; AGENT.md updated.",
+      "notes": "Quality over quantity; total ≤20."
+    },
+    {
       "id": "MS02",
       "title": "MS02 todo CLI adversarial multi-session pack",
       "status": "in_progress",

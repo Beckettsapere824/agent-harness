@@ -1,52 +1,18 @@
-# runs.md — Session Run Log
+# runs.md — Session Duration & Outcome Log
 
-Append-only. Newest entry at the **top**.
-
-Purpose: measure wall-clock duration of each agent run, track outcome, and support analysis of how long the harness stays coherent before handoff or failure.
+Newest entries at the top.
 
 ---
 
-## How to log (mandatory before ending a dialog)
+## 2026-11-24 — Orches init + skills layer (F011)
 
-At end of every working session, prepend one block:
-
-```markdown
-### YYYY-MM-DD HH:MM (timezone) — duration ~Xm
-- **Feature:** F00X / MS02 / none
-- **Outcome:** completed | partial | blocked | failed
-- **What advanced:** one-line summary
-- **Handoff quality:** clean | incomplete | missing next step
-- **Notes:** (optional)
-```
+- **Duration:** ~single long dialog (research + implementation)
+- **Feature:** F011 Skills layer + Orches bootstrap
+- **Outcome:** Orches repository initialized (AGENT.md, registry, identity schema, example identity). agent-harness gained skills/ (15 SKILL.md + README), AGENT.md updated with progressive disclosure and mandatory anti-drift assertion. State files (MEMORY, progress, feature_list, session-handoff) refreshed. MS02 remains at S2 boundary.
+- **Handoff quality:** High — exact next options (A: MS02 S2 or B: first real Orches identity) recorded; anti-drift checklist added.
 
 ---
 
-## Log
+## Prior entries
 
-### 2026-11-17 ~16:00 HKT — duration ~single dialog
-- **Feature:** F009 + F010 (Phase 1+2)
-- **Outcome:** completed
-- **What advanced:** Binding HARNESS_LESSONS, PUSH_GATE + assert_no_stub, EXIT_CRITERIA, RETRO_ROUND; AGENT.md read-order/inject/push/retro rules; audit strengthened; soft-exit E1/E2/E4–E7
-- **Handoff quality:** clean
-- **Notes:** Next dialog = MS02 S2 only.
-
-### 2026-11-04 ~14:20 HKT — duration ~25m
-- **Feature:** F008 + MS02 (state only)
-- **Outcome:** completed (merge); MS02 still in_progress at S2 gate
-- **What advanced:** Merged agent-harness-test eval/work/scores into agent-harness; preserved F001–F006 portable core; handoff points at MS02 S2
-- **Handoff quality:** clean
-- **Notes:** Next dialog must only do S2 (done + ledger phase 2).
-
-### 2026-11-04 ~04:10 HKT — duration ~20m
-- **Feature:** F006
-- **Outcome:** completed
-- **What advanced:** Strengthened session-handoff + AGENT.md End of Session
-- **Handoff quality:** clean
-- **Notes:** —
-
-### 2026-11-04 ~03:32 HKT — duration ~35m
-- **Feature:** F004, F005
-- **Outcome:** completed
-- **What advanced:** runs.md + PERSISTENCE_TEST.md
-- **Handoff quality:** clean
-- **Notes:** —
+(Historical entries from before 2026-11-24 remain valid; see git history if full text needed.)

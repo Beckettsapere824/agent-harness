@@ -6,14 +6,19 @@ Update at the end of every working session/dialog. Keep entries short and action
 
 ## Current
 
-- **Active feature:** MS02 — todo CLI adversarial multi-session pack
-- **State:** Phase 1+2 harness hardening complete (HARNESS_LESSONS, PUSH_GATE, assert_no_stub, EXIT_CRITERIA, RETRO_ROUND, AGENT/audit updates). MS02 **S1 complete**; portable core preserved.
-- **Next exact:** In a **fresh dialog**, implement **S2 only**: add `done ID` to `work/todo.py`; append ledger phase 2 to `work/session_ledger.json`; smoke add→done→list; **stop**; do not implement `rm`. Then update progress + handoff + runs.md.
-- **Blockers:** None. Requires a **fresh dialog** (no pasted chat).
+- **Active feature:** F011 Skills layer (landed) + residual MS02 at S2 boundary.
+- **State:** 2026-11-24 — Orches bootstrapped; 15 skills committed under skills/; AGENT.md now requires anti-drift assertion and progressive skill loading. MS02 S1 still the last completed pack phase.
+- **Next exact:** In a **fresh dialog**, either (A) implement MS02 S2 only (`done ID` + ledger phase 2; stop before `rm`), or (B) create the first real Orches work identity for a concrete multi-agent task supplied by the human. Prefer (A) if continuing harness reliability measurement; prefer (B) if starting orchestration work.
+- **Blockers:** None. Requires a **fresh dialog** (no pasted chat) for fair multi-dialog credit on MS02.
 
 ---
 
 ## Recent
+
+### 2026-11-24
+
+- Orches: AGENT.md, registry.md, schemas/identity.md, agents/example-orchestrator-001.md.
+- agent-harness: skills/ (15 SKILL.md + README), AGENT.md skills section + anti-drift, MEMORY/progress/feature_list/session-handoff/runs updated.
 
 ### 2026-11-17
 
