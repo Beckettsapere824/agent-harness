@@ -144,7 +144,7 @@
       "priority": 2,
       "depends_on": ["F010"],
       "definition_of_done": [
-        "skills/ directory with README + 15 SKILL.md (brainstorm, plan, implement, test-tdd, debug, code-review, verify, handoff, yagni, security-basics, anti-drift, ledger, push-gate, propose-improvement, status-report)",
+        "skills/ directory with README + 15 SKILL.md",
         "AGENT.md documents progressive disclosure and requires anti-drift startup assertion",
         "Copy guidance updated so specialized repos can include skills/"
       ],
@@ -163,8 +163,8 @@
         "S3 rm + ledger phase 3 + verify.sh green (separate dialog)",
         "Score recorded with continuity honesty"
       ],
-      "evidence": "S1 complete in work/todo.py + session_ledger phase 1 (merged from test repo).",
-      "notes": "Next: S2 only. Do not implement rm in S2."
+      "evidence": "S1 complete. S2 complete 2026-11-24 (done + ledger phase 2; rm not present).",
+      "notes": "Next: S3 only in a fresh dialog."
     }
   ]
 }

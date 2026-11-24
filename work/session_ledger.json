@@ -3,5 +3,10 @@
     "phase": 1,
     "session": "S1",
     "note": "add+list only; done/rm deliberately not implemented"
+  },
+  {
+    "phase": 2,
+    "session": "S2",
+    "note": "added done ID; rm deliberately not implemented"
   }
 ]

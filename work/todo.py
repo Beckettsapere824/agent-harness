@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Todo CLI — MS02. Session S1: add + list only."""
+"""Todo CLI — MS02. Session S2: add + list + done. rm not yet."""
 
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ def next_id(items: list) -> int:
 
 def main(argv: list[str]) -> int:
     if len(argv) < 2:
-        print("usage: todo.py {add TEXT|list}", file=sys.stderr)
+        print("usage: todo.py {add TEXT|list|done ID}", file=sys.stderr)
         return 2
     cmd = argv[1]
     items = load()
@@ -48,10 +48,31 @@ def main(argv: list[str]) -> int:
             print(f"{it['id']} {it['status']} {it['text']}")
         return 0
 
-    # S1 boundary: done/rm not implemented yet
+    if cmd == "done":
+        if len(argv) < 3:
+            print("usage: todo.py done ID", file=sys.stderr)
+            return 2
+        try:
+            target = int(argv[2])
+        except ValueError:
+            print("done ID must be an integer", file=sys.stderr)
+            return 2
+        found = False
+        for it in items:
+            if int(it["id"]) == target:
+                it["status"] = "done"
+                found = True
+                break
+        if not found:
+            print(f"no item with id {target}", file=sys.stderr)
+            return 1
+        save(items)
+        return 0
+
+    # S2 boundary: rm not implemented yet
     print(
-        f"unknown or not-yet-implemented in S1: {cmd}\n"
-        "S1 allows only: add, list",
+        f"unknown or not-yet-implemented in S2: {cmd}\n"
+        "S2 allows only: add, list, done",
         file=sys.stderr,
     )
     return 2
