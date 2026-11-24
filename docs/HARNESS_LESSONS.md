@@ -35,9 +35,21 @@ Read on every startup after AGENT.md. New failure classes discovered in any dial
 
 - Substantive rounds require a write to `docs/RETRO_ROUND.md` (or dated section) plus state-file updates. Chat-only retro is invalid.
 
+### Identity & skills (2026-11-24)
+
+- Orches unique-identity-per-dialog rule is binding for multi-agent work.
+- Skills use progressive disclosure; do not load all skill bodies by default.
+- Anti-drift startup assertion is mandatory every dialog.
+
 ---
 
 ## Lessons captured
+
+### 2026-11-24 — Skills layer + Orches bootstrap
+
+1. **Missing process skills** — Harness had strong state/verification but weak reusable process. Mitigation: 15 high-quality SKILL.md under skills/ with progressive disclosure; AGENT.md discovery contract.
+2. **Silent drift risk** — Agents could skip read-order without detection. Mitigation: mandatory anti-drift assertion (identity/harness, read order, active feature, next exact) at every startup.
+3. **Shared identity ambiguity** — Same identity across dialogs breaks management order at scale. Mitigation: Orches unique-identity-per-dialog rule + registry.
 
 ### 2026-11-17 — Phase 1/2 hardening (this repo)
 
