@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Todo CLI — MS02. Session S2: add + list + done. rm not yet."""
+"""Todo CLI — MS02. Session S3: add + list + done + rm."""
 
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ def next_id(items: list) -> int:
 
 def main(argv: list[str]) -> int:
     if len(argv) < 2:
-        print("usage: todo.py {add TEXT|list|done ID}", file=sys.stderr)
+        print("usage: todo.py {add TEXT|list|done ID|rm ID}", file=sys.stderr)
         return 2
     cmd = argv[1]
     items = load()
@@ -69,12 +69,23 @@ def main(argv: list[str]) -> int:
         save(items)
         return 0
 
-    # S2 boundary: rm not implemented yet
-    print(
-        f"unknown or not-yet-implemented in S2: {cmd}\n"
-        "S2 allows only: add, list, done",
-        file=sys.stderr,
-    )
+    if cmd == "rm":
+        if len(argv) < 3:
+            print("usage: todo.py rm ID", file=sys.stderr)
+            return 2
+        try:
+            target = int(argv[2])
+        except ValueError:
+            print("rm ID must be an integer", file=sys.stderr)
+            return 2
+        new_items = [it for it in items if int(it["id"]) != target]
+        if len(new_items) == len(items):
+            print(f"no item with id {target}", file=sys.stderr)
+            return 1
+        save(new_items)
+        return 0
+
+    print(f"unknown command: {cmd}", file=sys.stderr)
     return 2
 
 

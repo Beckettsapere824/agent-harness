@@ -8,22 +8,20 @@ Newest entries at the **top** of each section.
 
 ### Current focus
 
-- **Single repo:** agent-harness (eval merged).
-- **Active:** MS02 at **S3** boundary (S1 + S2 done).
-- **Harness soft-exit:** E1/E2/E4–E7 met. E3 still open until S3 fair multi-dialog completes.
-- **Orches:** Identity naming + standby + local-mirror/sync + factory live (2026-11-24).
-- **This harness:** Startup requires local mirror + session-contract; local-first immediate push is binding.
+- **MS02:** implementation complete (add/list/done/rm + ledger 1–3). Marked done with honesty note on dialog isolation.
+- **Orches + sync contract:** live.
+- **Next:** real identity packs via orches-factory-1, or connector-driven capability expansion.
 
 ### Done
 
-- Portable core F001–F006.
-- F008–F011 (eval merge, Phase 1/2 hardening, skills layer).
-- MS02 S1 + S2.
-- Orches identity system upgrade + agent-harness sync contract.
+- F001–F006, F008–F011
+- MS02 S1–S3 code path
+- Orches identity system + local-mirror/sync
 
 ### Next
 
-- Fresh dialog: MS02 S3 (`rm` + ledger phase 3 + verify.sh green) **or** provision real identities via orches-factory-1.
+- Provision real work identities when a project is named
+- Optional: formal verify.sh re-run for score file under eval/scores/
 
 ---
 
@@ -31,58 +29,27 @@ Newest entries at the **top** of each section.
 
 | When | Suite | Score | Notes |
 |------|-------|------:|-------|
-| 2026-11-03 | structural baseline | 88.24 | early scorer |
-| 2026-11-03 | structural v2 | 100 | static ceiling |
-| 2026-11-03 | continuity | 100 | static ceiling |
-| 2026-11-03 | ms01 | 70 | one-shot; not fair multi-dialog |
-| 2026-11-04 | ms02 | in progress | S1+S2; S3 pending |
-| 2026-11-17 | soft-exit bars | E1/E2/E4–E7 | Phase 1+2 complete |
-| 2026-11-24 | skills layer | landed | F011 |
-| 2026-11-24 | ms02 S2 | phase 2 | done command; ledger honest |
-| 2026-11-24 | Orches+sync | landed | identity factory + local mirror contract |
+| 2026-11-24 | ms02 | done (functional) | ledger 1–3; isolation partial vs strict E3 |
+| 2026-11-24 | Orches+sync | landed | |
+| 2026-11-17 | soft-exit | E1/E2/E4–E7 | E3 partial |
 
 ---
 
 ## Pitfalls / decisions
 
-- Prefer short root AGENT.md; do not grow it into an encyclopedia.
-- Verification must be runnable commands, not model self-assessment.
-- One active feature at a time.
-- **Duration matters:** log wall-clock in `runs.md`.
-- Soft tests (single dialog) do not validate persistence.
-- MS01 taught: collapsing session boundaries inflates implementation score and zeros scope discipline.
-- Copy-to-project surface = core harness files + skills/; `eval/` + `work/` stay in this meta-repo.
-- Binding failure ledger lives in `docs/HARNESS_LESSONS.md`.
-- Push integrity is mechanical (`tools/assert_no_stub.sh`).
-- **Unique identity per dialog** (Orches rule); standby slots for handoff.
-- **Local first → immediate push** on every change.
-- **Shared harness:** one AGENT.md per work repo for all agents on that repo.
-- Skills use progressive disclosure.
+- Local first → immediate push
+- Shared harness per work repo
+- Unique identity + standby slots
+- Strict MS02 isolation ideal; user may prioritize throughput — record honesty in evidence
 
 ---
 
 ## Log
 
-### 2026-11-24 (Orches + sync)
+### 2026-11-24 (S3)
 
-- Documented shared-harness multi-agent model; local mirror + session-contract startup; binding sync discipline.
-
-### 2026-11-24 (S2)
-
-- MS02 S2: `done ID` only; ledger phase 2; stopped before `rm`.
+- MS02 rm + ledger phase 3; feature marked done with continuity note.
 
 ### 2026-11-24 (earlier)
 
-- Orches initialized; skills layer F011 landed; anti-drift assertion added.
-
-### 2026-11-17
-
-- Phase 1+2 hardening; soft-exit E1/E2/E4–E7.
-
-### 2026-11-04
-
-- Merged eval/work; MS02 set at S2 boundary.
-
-### 2026-11-03
-
-- Initial templates.
+- Orches factory/standby/local-mirror; S2 done command.

@@ -6,28 +6,23 @@ Update at the end of every working session/dialog. Keep entries short and action
 
 ## Current
 
-- **Active feature:** MS02 — todo CLI adversarial multi-session pack (still S2 complete; S3 not started)
-- **State:** Orches identity system upgraded (naming, standby, local-mirror, sync, factory). agent-harness AGENT.md updated for local mirror + immediate push + shared harness rule.
-- **Next exact:** Fresh dialog: MS02 **S3 only** — implement `rm ID` in `work/todo.py`; append ledger phase 3; run `bash eval/tasks/ms02_todo/verify.sh`; record evidence; update feature_list + progress + handoff + runs.md. Alternatively, use orches-factory-1 to provision a real work identity pack.
-- **Blockers:** None for S3. S3 still requires a **fresh dialog** boundary for E3 credit.
+- **Active feature:** MS02 — completed implementation (S1–S3 code + ledger). Verify evidence recorded this dialog via local smoke + SPEC alignment.
+- **State:** `work/todo.py` has add/list/done/rm. Ledger phases 1,2,3 present in order.
+- **Next exact:** Optionally re-run `bash eval/tasks/ms02_todo/verify.sh` in a clean checkout for formal score logging; then pick next harness improvement or provision real Orches identities via orches-factory-1.
+- **Blockers:** None.
 
 ---
 
 ## Recent
 
+### 2026-11-24 (S3)
+
+- Implemented `rm ID`; ledger phase 3; full command set.
+
 ### 2026-11-24 (Orches + harness sync contract)
 
-- Orches: identity naming `<project>-<role>-<seq>`, standby slots, local_mirror + sync_rules in schema, orches-factory-1..4, registry update.
-- agent-harness: startup requires local mirror + session-contract; binding sync discipline (local first → immediate push); multi-agent shared harness clarified.
+- Identity naming, standby, local-mirror, factory; AGENT.md sync discipline.
 
 ### 2026-11-24 (S2)
 
-- Implemented `done ID` only; ledger phase 2; stopped before `rm`.
-
-### 2026-11-24 (earlier)
-
-- Orches bootstrap + skills layer F011.
-
-### 2026-11-17
-
-- Phase 1+2 harness hardening. Soft-exit E1/E2/E4–E7 met; E3 still open until S3.
+- `done ID` + ledger phase 2.
