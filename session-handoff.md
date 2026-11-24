@@ -7,7 +7,7 @@ A fresh agent with **only** this file + the other harness files must be able to 
 
 ## Last updated
 
-2026-11-24 (S2 complete)
+2026-11-24 (Orches identity + local-mirror/sync contract landed)
 
 ## Active feature
 
@@ -17,7 +17,7 @@ A fresh agent with **only** this file + the other harness files must be able to 
 
 | Field | Value |
 |-------|-------|
-| Last run duration | S2 dialog (done command only) |
+| Last run duration | design + Orches/harness contract update |
 | Feature started | 2026-11-04 (S1) |
 | Elapsed wall time on feature | S1 + S2 done; S3 remaining |
 | Expected remaining | One more dialog (S3 + verify) |
@@ -25,44 +25,47 @@ A fresh agent with **only** this file + the other harness files must be able to 
 ## What was done
 
 - S1: add + list; ledger phase 1.
-- S2 (this dialog): `done ID` implemented in `work/todo.py`; ledger phase 2 appended.
-- Skills layer F011 and Orches bootstrap remain in place from earlier today.
+- S2: `done ID`; ledger phase 2.
+- Orches: naming, standby, local_mirror, sync_rules, identity factory (orches-factory-1..4).
+- agent-harness AGENT.md: local mirror + session-contract on startup; immediate push discipline; shared harness for multi-agent.
 
-## What remains (next dialog must do only this)
+## What remains (next dialog — pick one focus)
 
-**S3**
+**A — MS02 S3 only**
 
 1. Read this handoff + `eval/tasks/ms02_todo/SPEC.md`
-2. Add `rm ID` to `work/todo.py`
-3. Append ledger entry `{"phase": 3, "session": "S3", "note": "..."}`
+2. Add `rm ID` to `work/todo.py` only
+3. Append ledger `{"phase": 3, "session": "S3", "note": "..."}`
 4. Run `bash eval/tasks/ms02_todo/verify.sh` (must pass)
-5. Record evidence / score; mark MS02 done in feature_list.json if green
-6. Update progress + this handoff + runs.md
+5. Record evidence; mark MS02 done if green; update progress + handoff + runs.md
+
+**B — Provision real work identities** via Orches `orches-factory-1`
 
 ## Resume checklist (next agent — do in order)
 
-- [ ] Read `AGENT.md` fully (skills + anti-drift assertion)
-- [ ] Perform anti-drift assertion
+- [ ] If Orches identity assigned: load it, write local session-contract + mirrors
+- [ ] Read `AGENT.md` fully (skills + anti-drift + sync discipline)
+- [ ] Perform anti-drift assertion including local mirror present
 - [ ] Read `MEMORY.md`
 - [ ] Read `docs/HARNESS_LESSONS.md`
-- [ ] Read `feature_list.json` — confirm MS02 still `in_progress`
+- [ ] Read `feature_list.json`
 - [ ] Read this file + latest `runs.md`
 - [ ] Run `./init.sh` (optional audit / assert_no_stub)
-- [ ] Read `eval/tasks/ms02_todo/SPEC.md`
-- [ ] Implement **S3 only** (rm + ledger phase 3 + verify.sh)
+- [ ] Execute **one** focus only (S3 or factory provisioning)
+- [ ] Every edit: local first → immediate push
 - [ ] Before ending: refresh this file, prepend `runs.md`, update progress + feature_list
 
 ## Known failure modes (avoid these)
 
 | Failure | Symptom | Mitigation |
 |---------|---------|------------|
-| One-shot residual | Anything beyond rm+verify in same dialog | Stop after S3 verify |
-| Fabricated ledger | Phase 3 written without real dialog boundary | Append only at end of this dialog |
-| Vague next step | Handoff says “continue” | Exact commands above |
-| Missing duration | No `runs.md` entry | Prepend every dialog |
-| Chat dependence | Next agent needs prior chat | This file + SPEC must suffice |
+| One-shot residual | Anything beyond single focus in same dialog | Stop after chosen focus |
+| Fabricated ledger | Phase 3 without real dialog boundary | Append only at end of S3 dialog |
+| Stale cloud | Local changed but no push | Sync discipline |
+| Missing local mirror | Next dialog cannot find contract | Startup step 2 mandatory |
+| Chat dependence | Next agent needs prior chat | This file + SPEC + identity must suffice |
 
 ## Risks / notes
 
-- Full `verify.sh` currently fails (missing phase 3 and `rm`) — expected until S3.
+- Full `verify.sh` fails until S3 (missing phase 3 and `rm`) — expected.
 - Soft-exit E3 still open until S3 completes with honest ledger.

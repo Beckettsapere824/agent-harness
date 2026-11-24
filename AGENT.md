@@ -13,27 +13,42 @@ Load full skill bodies, `docs/`, `eval/`, or other files **only on demand** for 
 
 Build and maintain a reliable, repo-native agent harness that can be copied into arbitrary repositories and used across dialogs via GitHub connector, without relying on chat history. In *this* repository, also raise measurable reliability via `eval/` multi-session packs and score history.
 
+**Multi-agent rule:** One work repo = **one shared harness** (this `AGENT.md` + `skills/` + shared state files). Multiple Orches identities may work this repo; role/persona differences live in Orches identities only, not in forked copies of this file.
+
 ---
 
 ## Startup Workflow (mandatory)
 
 Before writing code or claiming progress:
 
-1. Confirm working directory / repo context.
-2. Read this file completely.
-3. Read `MEMORY.md` (status, pitfalls, recent log, scores).
-4. Read `docs/HARNESS_LESSONS.md` (binding failure ledger).
-5. Skim `docs/EXIT_CRITERIA.md` for open bars.
-6. Run `./init.sh` (or the verification commands listed at the bottom). Fix failures before new scope.
-7. Optionally run `./audit-harness.sh` and `./tools/assert_no_stub.sh`.
-8. Read `feature_list.json`. Select **exactly one** unfinished feature.
-9. Read `progress.md` (must contain **Next exact**), `session-handoff.md`, and recent `runs.md`.
-10. Skim `skills/README.md` (descriptions only). Load a full skill body only when that skill is selected.
-11. Load further docs or eval only when needed for the chosen feature.
+1. Confirm working directory / repo context (and Orches identity if one was assigned).
+2. **Local mirror + session contract (required):**
+   - Ensure core harness files are present in the local workspace the dialog can write to (sandbox/project folder). If this dialog was started via Orches, follow the identity’s `local_mirror` paths.
+   - Write or refresh `session-contract.md` in the local cache (identity id if any, primary repo, sync rule: local first → immediate push, memory targets).
+   - Prefer reading from the local mirror after the first successful sync; still treat GitHub as system of record on conflict.
+3. Read this file completely.
+4. Read `MEMORY.md` (status, pitfalls, recent log, scores).
+5. Read `docs/HARNESS_LESSONS.md` (binding failure ledger).
+6. Skim `docs/EXIT_CRITERIA.md` for open bars.
+7. Run `./init.sh` (or the verification commands listed at the bottom). Fix failures before new scope.
+8. Optionally run `./audit-harness.sh` and `./tools/assert_no_stub.sh`.
+9. Read `feature_list.json`. Select **exactly one** unfinished feature.
+10. Read `progress.md` (must contain **Next exact**), `session-handoff.md`, and recent `runs.md`.
+11. Skim `skills/README.md` (descriptions only). Load a full skill body only when that skill is selected.
+12. Load further docs or eval only when needed for the chosen feature.
 
-**Anti-drift assertion (required):** Before any other work the agent must be able to state from files alone: (a) which identity or repo harness it is under, (b) that the mandatory read order is complete, (c) the single active feature id, (d) the exact next step. If any item cannot be answered, stop and repair handoff/identity first. See `skills/anti-drift/SKILL.md`.
+**Anti-drift assertion (required):** Before any other work the agent must be able to state from files alone: (a) which identity or repo harness it is under, (b) that the mandatory read order is complete, (c) the single active feature id, (d) the exact next step, (e) that local mirror / session-contract exists. If any item cannot be answered, stop and repair handoff/identity/mirror first. See `skills/anti-drift/SKILL.md`.
 
 If baseline verification fails, repair that first.
+
+---
+
+## Sync discipline (binding)
+
+- **Local first, cloud second.** Any edit to harness files, progress, memory, handoff, skills, or feature_list: write the local copy → **immediately** push to GitHub via connector. Do not batch changes for a single end-of-dialog push.
+- Memory / progress / handoff updates also reflect status on the Orches identity when one is in use.
+- If push fails: keep local correct, note pending sync, retry on the next write.
+- Adding or removing a skill (or editing AGENT.md) follows the same path: local → immediate push so the next dialog never sees a stale cloud tree.
 
 ---
 
@@ -49,7 +64,7 @@ See `skills/README.md` for the discovery contract. Prefer invoking a named skill
 
 - **One feature at a time.** Do not start a second feature until the current one has evidence of done.
 - **Verification required.** Do not mark a feature done or say “done” without running the verification commands and recording evidence in `feature_list.json` or `progress.md`.
-- **Repo is the system of record.** Chat history is ephemeral. All durable state lives in the files above.
+- **Repo is the system of record; local is the working truth.** Chat history is ephemeral. Durable state lives in files; local mirror must stay aligned via immediate push.
 - **Stay in scope.** Do not modify unrelated files or rewrite the feature list to hide unfinished work.
 - **Leave clean state.** The next session/dialog must be able to run `./init.sh` immediately.
 - **Honest reporting.** Mark drafts unfinished; report failures as failures; do not bypass limits to avoid asking.
@@ -70,6 +85,7 @@ A feature is done only when **all** of the following are true:
 - [ ] Required verification actually ran (tests / lint / type-check / smoke / pack verify / assert_no_stub)
 - [ ] Evidence recorded in `feature_list.json` or `progress.md`
 - [ ] Repository remains restartable from the standard startup path
+- [ ] Local and cloud copies of touched files were synced (local → push)
 
 ---
 
@@ -77,8 +93,8 @@ A feature is done only when **all** of the following are true:
 
 Before ending:
 
-1. Update `progress.md` with current state and an **exact** next concrete step ("Next exact").
-2. Update `feature_list.json` status and evidence fields.
+1. Update `progress.md` with current state and an **exact** next concrete step ("Next exact") — local → push.
+2. Update `feature_list.json` status and evidence fields — local → push.
 3. If work is incomplete, refresh `session-handoff.md` including **all** of:
    - Active feature (id + title)
    - **Timing**: last run duration, feature start, elapsed wall time, expected remaining
@@ -88,10 +104,10 @@ Before ending:
 4. **Prepend a run entry to `runs.md`** (approx duration, feature, outcome, handoff quality).
 5. For substantive rounds: append a short section to `docs/RETRO_ROUND.md`.
 6. If a new failure class appeared: append to `docs/HARNESS_LESSONS.md`.
-7. Commit only when the tree is in a safe, restartable state.
+7. If using an Orches identity: update its status / last_activity / next_exact (local Orches cache → push Orches).
 8. Prefer short, actionable notes over long narrative.
 
-A fresh agent must be able to resume from files alone. If the next agent would need to ask “what were we doing?”, the handoff is incomplete. Use `skills/handoff`.
+A fresh agent must be able to resume from files alone (local mirror + GitHub). If the next agent would need to ask “what were we doing?”, the handoff is incomplete. Use `skills/handoff`.
 
 ---
 
@@ -124,6 +140,7 @@ When copying the harness into another project, replace project-specific checks i
 - Architecture or product decisions → consult `docs/` / `TASKS.md` if present, otherwise ask the human.
 - Unclear requirements → ask one concrete question; do not invent scope.
 - Repeated verification failures → update progress, leave a clear blocker note, stop.
+- Dialog limit / drift → mark Orches identity `handoff` or `blocked`, promote `standby_next`, leave work repo restartable.
 
 ---
 
