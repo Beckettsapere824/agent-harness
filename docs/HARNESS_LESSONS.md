@@ -33,7 +33,7 @@ Read on every startup after AGENT.md. New failure classes discovered in any dial
 
 ### Retro
 
-- Substantive rounds require a write to `docs/RETRO_ROUND.md` (or dated section) plus state-file updates. Chat-only retro is invalid.
+- Substantive rounds require a write to `docs/RETRO_ROUND.md` (or equivalent dated note) plus state-file updates. Chat-only retro is invalid.
 
 ### Identity & skills (2026-11-24)
 
@@ -41,9 +41,21 @@ Read on every startup after AGENT.md. New failure classes discovered in any dial
 - Skills use progressive disclosure; do not load all skill bodies by default.
 - Anti-drift startup assertion is mandatory every dialog.
 
+### Sandbox / low-RAM (2026-11-25)
+
+- Grok dialog sandbox ≈ 1.2 GiB. Full root builds (e.g. Lean `Package.Defs`) kill the VM.
+- Always prefer leaf modules + `LEAN_NUM_THREADS=1` (or language equivalent). See `docs/SANDBOX_CONTROL.md`.
+- Honest release when the local sandbox cannot complete the official check; do not claim success.
+
 ---
 
 ## Lessons captured
+
+### 2026-11-25 — Extreme utilization of Grok 1.2GiB sandbox (from P-NP)
+
+1. **Full aggregator OOMs** — Building or importing the complete Defs root on the Grok Hades-class VM recycles the host. Mitigation: leaf-only `lake build +Package.Defs.Leaf`; Outside files must not import the root; document in `docs/SANDBOX_CONTROL.md`.
+2. **Thread multiplier kills** — Default multi-thread Lean exceeds RAM. Mitigation: force `LEAN_NUM_THREADS=1`.
+3. **Honest resource handoff** — When the sandbox cannot finish a CI-equivalent check, release the lease with an explicit reason and prefer a larger machine for the final PR. Mitigation: operating notes + SANDBOX_CONTROL checklist.
 
 ### 2026-11-24 — Skills layer + Orches bootstrap
 
