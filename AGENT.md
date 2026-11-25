@@ -153,6 +153,7 @@ When copying the harness into another project, replace project-specific checks i
 |------|------|
 | `MEMORY.md` | Status, pitfalls, scores, log |
 | `docs/HARNESS_LESSONS.md` | Binding failure ledger |
+| `docs/SANDBOX_CONTROL.md` | Low-RAM / Grok sandbox discipline (leaf builds, threads=1) |
 | `docs/COMPLIANCE_REVIEW.md` | Dialog self-audit (misses = dialog, not harness) |
 | `docs/HARNESS_PUSH_GATE.md` | Anti-placeholder procedure |
 | `docs/EXIT_CRITERIA.md` | Measurable harness bars |
